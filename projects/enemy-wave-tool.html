@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<title>Laochra | Projects</title>
+		
+		<link rel="icon" href="../icons/main/mushroom.png" type="image/png">
+        <link rel="apple-touch-icon" href="../icons/main/mushroom.png" type="image/png">
+		
+		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+
+		<link rel="stylesheet" href="../css/main.css" type="text/css">
+		
+		<!-- DISABLE LOAD ANIMATIONS -->
+		<script type="text/javascript">
+  			
+			document.addEventListener("DOMContentLoaded",function()
+		  	{
+    			let node = document.querySelector('.Preload');
+    			node.classList.remove('Preload');
+  			});
+			
+		</script>
+		
+	</head>
+
+	<body class="Preload">
+		
+		<div class="Header">
+			
+			<a href="../index.html">
+				<img class="HeaderLogo" src="../images/main/home-image.png" alt="Home Button">
+			</a>
+			
+			<div class="HeaderNav">
+				
+				<a href="../about.html">About</a>
+				
+				<div class="DropButton">
+					
+					<div class="DropButtonText" style="margin: 0 2vw">Projects</div>
+					
+					<div class="DropMenu">
+						<br>
+						<a href="pathfinding-creation-tool.html">Pathing Tool</a>
+						<br><br>
+						<a href="enemy-wave-tool.html">Wave Tool</a>
+						<br><br>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<video width="100%" height="100%" autoplay muted loop poster="../images/main/backgroundVideoStandin.PNG"
+		style="position:fixed; top:0; left:0; z-index:-100; filter: blur(7px) brightness(50%); object-fit: cover;">
+			<source src="../videos/main/background.mp4" type="video/mp4">
+		</video>
+		
+		<div class="ProfileContainer">
+			
+			<div class="Title" style="margin:0;">Enemy Wave Tool</div>
+
+			<div class="Profile" id="WideProfile">
+				<h1 style="margin-bottom:0; margin-top:0;">The Goal</h1>
+				<br>
+				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../images/enemyWaveTool/LateGameWaves.gif" alt="Gif of Boids">
+				<h3>Shroom Defenders</h3>
+				<p style="margin-top:0;">
+					Shroom Defenders is a tower defence game made by second year students as a
+					part of AIE's advanced diploma course. I was the tools programmer on this team.
+				</p>
+				<br>
+				<br>
+				<h1>The Requirements</h1>
+				<p style="margin-top:0;">
+					The project requires defined wave durations, spacing of enemies, multiple defined spawn
+					directions per wave, multiple types of enemies, as well as the ability to be hooked up
+					to indicators that warn the player which direction enemies will come from. All of this
+					is to be achieved in a way that is accessible to designers.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/enemyWaveTool/InterfacePlan.png" alt="Wave Tool Interface Plan">
+				<h3>Interface Plan</h3>
+				<br>
+				<p style="margin-top:0;">
+					The above plan features dropdowns for selecting enemy types, as well as a selector for timing
+					logic. With Previous will define that a batch of enemies spawns alongside the previous one,
+					while After Previous will define that a batch will wait for the previous to end. Additional
+					delay timers will be added for finer tuning of the waves.
+				</p>
+			</div>
+
+			<div class="Profile" id="WideProfile">
+				<p style="margin-top:0;"> 29th June - 2nd July 2023 </p>
+				<h1 style="margin-bottom:0; margin-top:0;">Prototyping</h1>
+				<br>
+				<img style="margin-bottom:0; margin-top:0;"  src="../images/enemyWaveTool/WaveSelector.png" alt="Wave Tool Selector">
+				<h3>Wave Selector</h3>
+				<br>
+				<p style="margin-top:0;">
+					The first thing I wanted to get working was a sidebar that allows switching
+					between the waves the user would like to edit. This will allow the content
+					fields to be better seperated and contained, and hopefully allow for less
+					mental load on the designers.
+					<br><br>
+					The way it was implemented here is by containing a list of waves, along
+					with an index representing which is currently selected. The selected index
+					changes when a different wave button is clicked. Also included were Add and
+					Remove buttons which would create a new wave entry, or remove the most recently
+					created one, respectively.
+				</p>
+				<br>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/enemyWaveTool/WaveContentFields.png" alt="Wave Tool Content Fields">
+				<h3>Wave Content Fields</h3>
+				<br>
+				<p style="margin-top:0;">
+					The created data is stored in a custom asset file using Unity's in-built Scriptable
+					Objects. This will allow for the creation of multiple wave collections so multiple
+					designers can iterate on them at once if they wish, or support the need for multiple
+					levels should it arise. Also, the way removing a wave worked was revamped to allow
+					for any wave to be removed rather than simply the most recently created one.
+					<br><br>
+					Each wave's data is handled by a struct, which further contains structs for each batch of
+					enemies a wave could spawn. An enemy prefab would be specified, and along with that a user
+					can define the individual spacings between enemies, as well as between batches of them.
+					<br><br>
+					The idea for batches came about as a solution to how to group enemies such that a
+					designer can define a wave like the following example: 1x Strong Enemy, 5x Medium Enemies,
+					and 10x Weak Enemies, without the need to input each enemy seperately, or randomly
+					distribute between the enemy types.
+				</p>
+			</div>
+			<div class="Profile" id="WideProfile">
+				<p style="margin-top:0;"> 19th September 2023 </p>
+				<h1 style="margin-bottom:0; margin-top:0;">Initial Implementation</h1>
+				<p style="margin-top:0;">
+					Up until this point for our proof of concept I had simply been instantiating enemies at
+					t=0 on a spline and progressing them along it. This was fine for getting the idea across
+					but the enemies were eventually going to use a flocking algorithm so a wave spawner was
+					needed. I was to make a limited version for alpha that was for the most part technically
+					complete, even if it needed to later be improved for use. Due to a lack of designer
+					workpower on the project at the time considerations also needed to be made to ensure not
+					a huge amount of tweaking would be needed.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/enemyWaveTool/InitialImplementation.gif" alt="Alpha Gameplay GIF">
+				<h3>Alpha Gameplay</h3>
+				<br>
+				<p style="margin-top:0;">
+					The result of this was a system that allowed for the defining of which enemies would
+					appear on a wave, the total amount of enemies the wave contained, and the duration the
+					wave would last. Also a bit later the option was added to choose the direction enemies
+					came from instead of it being random.
+				</p>
+			</div>
+			<div class="Profile" id="WideProfile">
+				<p style="margin-top:0;"> 8th November 2023 </p>
+				<h1 style="margin-bottom:0; margin-top:0;">Aligning With Final Requirements</h1>
+				<p style="margin-top:0;">
+					Once time between other tasks allowed it I got to work on bringing the wave spawner up to
+					date with the projects needs, and support the fact that there was now a designer wanting
+					to balance the waves and finding the initial implementation too limiting.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/enemyWaveTool/FinalImplementation.gif" alt="Gold Gameplay GIF">
+				<h3>Gold Gameplay</h3>
+				<br>
+				<p style="margin-top:0;">
+					This resulted in a system that allowed for almost all of my originally planned features.
+					Batch grouping was one of the most interesting challenges, as the designers wanted to define
+					waves duration in seconds instead of via enemy spacing. The way of solving this was by
+					calculating an "effective" enemy count by grouping together batches that played in sync
+					and adding the duration of each groups longest batch.
+				</p>
+			</div>
+			<div class="Profile" id="WideProfile">
+				<h1 style="margin-bottom:0; margin-top:0;">Post Mortem</h1>
+				<p style="margin-top:0;">
+					Overall this tool is something I am happy with and I was really glad to be able to provide it
+					to the team. If I had more time I would have loved to implement timed delays between batches,
+					as well as the planned cleaner interface.
+				</p>
+				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../images/enemyWaveTool/LateGameWaves.gif" alt="Gif of Late Game Waves">
+				<h3>Late Game Hordes</h3>
+				<br>
+				<p style="margin-top:0;">
+					I learned a lot from this experience, including the challenges of fitting a tool to designer
+					requirements, needing to make creative decisions and problem solve new requirements as they
+					cropped up, as well as how fitting such an integral tool's development into a project timeline
+					looks.
+				</p>
+			</div>
+		</div>
+		
+		<div class="Footer">
+			<div class="FootNote">
+				<p>Mushroom icon designed by <a href="www.freepik.com" style="margin: 0; float: none;">Freepik</a>.</p>
+				<p>Mail icon designed by <a href="https://www.vecteezy.com/free-png/email-icon" style="margin: 0; float: none;">Vecteezy</a>.</p>
+
+				<br>
+
+				<p>
+					&copy; Laochra 2023
+				</p>
+			</div>
+			
+			<div class="FootNav">
+				<a href="../index.html">Home</a>
+				
+				<br>
+				
+				<a href="../about.html">About</a>
+				
+			</div>
+		</div>
+		
+	</body>
+	
+</html>

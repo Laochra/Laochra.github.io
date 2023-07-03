@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<title>Laochra | Portfolio</title>
+		
+		<link rel="icon" href="icons/main/mushroom.png" type="image/png">
+        <link rel="apple-touch-icon" href="icons/main/mushroom.png" type="image/png">
+		
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+		<link rel="stylesheet" href="css/main.css" type="text/css">
+		
+		<!-- DISABLE LOAD ANIMATIONS -->
+		<script type="text/javascript">
+  			
+			document.addEventListener("DOMContentLoaded",function()
+		  	{
+    			let node = document.querySelector('.Preload');
+    			node.classList.remove('Preload');
+  			});
+			
+		</script>
+		
+	</head>
+
+	<body class="Preload">
+		
+		<div class="Header">
+			
+			<a href="index.html">
+				<img class="HeaderLogo" src="images/main/home-image.png" alt="Home Button">
+			</a>
+			
+			<div class="HeaderNav">
+				
+				<a href="about.html">About</a>
+				
+				<div class="DropButton">
+					
+					<div class="DropButtonText" style="margin: 0 2vw">Projects</div>
+					
+					<div class="DropMenu">
+						<br>
+						<a href="projects/pathfinding-creation-tool.html">Pathing Tool</a>
+						<br><br>
+						<a href="projects/enemy-wave-tool.html">Wave Tool</a>
+						<br><br>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<video width="100%" height="100%" autoplay muted loop poster="images/main/backgroundVideoStandin.PNG"
+		style="position:fixed; top:0; left:0; z-index:-100; filter: brightness(50%); object-fit: cover;">
+			<source src="videos/main/background.mp4" type="video/mp4">
+		</video>
+		
+		<div class="LandingContainer">
+			
+			<div class="Title">
+				<h1 style="margin-bottom:0;">Laochra</h1>
+			</div>
+			
+			<div class="Subtitle">
+				Game Systems and Tools Programmer
+			</div>
+			
+			<a href="#Work">
+				<div class="Button">
+				My Work
+				</div>
+			</a>
+			
+			<div class="SocialMediaMenu">
+
+				<a href="https://github.com/Laochra">
+					<img class="SocialMediaButton" src="icons/main/github.png" alt="GitHub Link">					
+				</a>
+					
+				<br>
+				
+				<a href="https://laochra.itch.io/">
+					<img class="SocialMediaButton" src="icons/main/itchio.png" alt="Itch.io Link">
+				</a>
+
+				<br>
+				
+				<a href="https://www.linkedin.com/in/laochra/">
+					<img class="SocialMediaButton" src="icons/main/linkedin.png" alt="LinkedIn Link">
+				</a>
+				
+				<br>
+
+				<a href="mailto: laochraelle@outlook.com">
+					<img class="SocialMediaButton" src="icons/main/mail-icon.png" alt="Email Link">
+				</a>
+
+			</div>
+		
+		</div>
+
+		<div class="Divider" style="margin:30vw 0 5vw 0"></div>
+		
+		<div class="ScrollTarget"><a id="Work"></a></div>
+
+		<div class="ArticlesContainer">
+		
+			<div class="Subheading">
+				Recent Projects
+			</div>
+			
+			<div class="Article">
+				
+				Completed November 2023
+				
+				<h1 style="width:100%; margin-bottom:0; text-align: center;">Enemy Wave Tool</h1>
+
+				<a href="projects/enemy-wave-tool.html">
+					<img src="images/enemyWaveTool/WaveContentFields.png" alt="Image of the Wave Tool">
+				</a>
+				
+				<br><br>
+
+				I designed and programmed this tool for a Tower Defence project as part of AIE's Professional
+				Game Development course. The goal was to successfully make a tool that makes creating enemy
+				waves as seemless as possible.
+				<br>
+				The project required defined wave durations, spacing of enemies,
+				multiple defined spawn directions per wave, multiple types of enemies, as well as the ability
+				to be hooked up to indicators that warn the player which direction enemies will come from. All
+				of this was to be achieved in a way that was accessible to designers.
+				
+				<br>
+				
+				<a href="projects/enemy-wave-tool.html" style="width:100%; text-align:center;">See My Creation Process!</a>
+				
+				<div class="TagContainer">
+					Tags
+					
+					<br>
+					
+					<div class="Tag">Tool Development</div>
+					<div class="Tag">Programming</div>
+					<div class="Tag">UI Design</div>
+					<div class="Tag">Unity</div>
+				</div>
+				
+			</div>
+			
+			<div class="Article">
+				
+				Completed September 2023
+				
+				<h1 style="width:100%; margin-bottom:0; text-align:center;">Pathfinding Creation Tool</h1>
+
+				<a href="projects/pathfinding-creation-tool.html">
+					<img src="images/pathfindingCreationTool/DrawingToFlowmap.png" alt="Image Representing a Drawing Turned into a Flowmap">
+				</a>
+
+				<br><br>
+
+				I designed and programmed this tool for a Tower Defence project as part of AIE's
+				Professional Game Development course. The goal was to streamline the process of creating
+				levels so that the art and pathfinding generation could line up as smoothly as possible.
+				<br>
+				This was achieved using Dijkstra's algorithm to generate a flow map using an input texture with
+				3 shades defining the difficulty of traversal. The output texture could then be read at runtime
+				and stored in memory to be queried by the game's flocking algorithm as enemies traversed the map.				
+				<br>
+				
+				<a href="projects/pathfinding-creation-tool.html" style="width:100%; text-align: center;">See My Creation Process!</a>
+				
+				<div class="TagContainer">
+					Tags
+					
+					<br>
+					
+					<div class="Tag">Tool Development</div>
+					<div class="Tag">Programming</div>
+					<div class="Tag">Systems Design</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		
+		<div class="Footer">
+			<div class="FootNote">
+				<p>Mushroom icon designed by <a href="www.freepik.com" style="margin: 0; float: none;">Freepik</a>.</p>
+				<p>Mail icon designed by <a href="https://www.vecteezy.com/free-png/email-icon" style="margin: 0; float: none;">Vecteezy</a>.</p>
+
+				<br>
+
+				<p>
+					&copy; Laochra 2023
+				</p>
+			</div>
+			
+			<div class="FootNav">
+				<a href="index.html">Home</a>
+				
+				<br>
+				
+				<a href="about.html">About</a>
+				
+			</div>
+		</div>
+		
+	</body>
+	
+</html>

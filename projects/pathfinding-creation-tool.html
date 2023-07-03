@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<title>Laochra | Projects</title>
+		
+		<link rel="icon" href="../icons/main/mushroom.png" type="image/png">
+        <link rel="apple-touch-icon" href="../icons/main/mushroom.png" type="image/png">
+		
+		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+
+		<link rel="stylesheet" href="../css/main.css" type="text/css">
+		
+		<!-- DISABLE LOAD ANIMATIONS -->
+		<script type="text/javascript">
+  			
+			document.addEventListener("DOMContentLoaded",function()
+		  	{
+    			let node = document.querySelector('.Preload');
+    			node.classList.remove('Preload');
+  			});
+			
+		</script>
+		
+	</head>
+
+	<body class="Preload">
+		
+		<div class="Header">
+			
+			<a href="../index.html">
+				<img class="HeaderLogo" src="../images/main/home-image.png" alt="Home Button">
+			</a>
+			
+			<div class="HeaderNav">
+				
+				<a href="../about.html">About</a>
+				
+				<div class="DropButton">
+					
+					<div class="DropButtonText" style="margin: 0 2vw">Projects</div>
+					
+					<div class="DropMenu">
+						<br>
+						<a href="pathfinding-creation-tool.html">Pathing Tool</a>
+						<br><br>
+						<a href="enemy-wave-tool.html">Wave Tool</a>
+						<br><br>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<video width="100%" height="100%" autoplay muted loop poster="../images/main/backgroundVideoStandin.PNG"
+		style="position:fixed; top:0; left:0; z-index:-100; filter: blur(7px) brightness(50%); object-fit: cover;">
+			<source src="../videos/main/background.mp4" type="video/mp4">
+		</video>
+		
+		<div class="ProfileContainer">
+			
+			<div class="Title" style="margin:0;">Pathfinding Creation Tool</div>
+
+			<div class="Profile" id="WideProfile">
+				<h1 style="margin-bottom:0; margin-top:0;">The Goal</h1>
+				<br>
+				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../images/enemyWaveTool/LateGameWaves.gif" alt="Gif of Boids">
+				<h3>Shroom Defenders</h3>
+				<p style="margin-top:0;">
+					Shroom Defenders is a tower defence game made by second year students as a
+					part of AIE's advanced diploma course. I was the tools programmer on this team.
+				</p>
+				<br>
+				<br>
+				<h1>The Requirements</h1>
+				<p style="margin-top:0;">
+					The project needs something to direct enemies along paths and towards the centre
+					of the level. Enemies should be able to move fluidly and not in purely straight lines.
+					Enemies wandering off the path briefly is okay, and expected when they swarm, but they
+					should attempt to get back onto the path quickly. The project also requires a way of
+					determining where towers (shrooms) can be placed, which should be opposite to the
+					areas enemies can traverse.
+				</p>
+			</div>
+
+			<div class="Profile" id="WideProfile">
+				<p style="margin-top:0;"> 23rd August 2023 </p>
+				<h1 style="margin-bottom:0; margin-top:0;">Levels As 2D Arrays</h1>
+				<p style="margin-top:0;">
+					The solution to the requirements I came up with was to have a grid of values that
+					represents the level. This will store whether a tile is Walkable or Placable so the
+					interaction manager can check where it can and can't place towers. This will also be
+					vital later when storing the direction enemies should be instructed to go.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/LevelGrid.png" alt="Debug Lines Showing the Level Grid">
+				<h3>Debug Display of Level Grids</h3>
+				<br>
+				<p style="margin-top:0;">
+					A very helpful thing I got working early on was a visualisation of the levels flow lines.
+					This allowed me to quickly check that values were being set correctly. Currently they all
+					just tend to the centre so thats where the next step comes in.
+				</p>
+			</div>
+			<div class="Profile" id="WideProfile">
+				<p style="margin-top:0;"> 24th August 2023 </p>
+				<h1 style="margin-bottom:0; margin-top:0;">Implementing Dijkstra's Algorithm</h1>
+				<p style="margin-top:0;">
+					Due to the need to have all the tiles filter into the centre of the map it seemed like
+					a natural fit to use a flood fill to populate the flow data. To achieve this I used
+					dijkstra's algorithm with the only end condition being when all tiles are filled.
+					This also allows for pathfinding calculations to be front loaded and not become more
+					expensive the more enemies we have.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/DijkstrasDebug.png" alt="Debug Lines Showing Results">
+				<h3>Debug Display of Algorithm Results</h3>
+				<br>
+				<p style="margin-top:0;">
+					After first using a given input texture to store in each tile whether it is placeable
+					or walkable, the flood fill commences. Placeable tiles have a higher cost to enter
+					than walkable tiles, causing them to quickly flow back out.
+				</p>
+			</div>
+			<div class="Profile" id="WideProfile">
+				<p style="margin-top:0;"> 26th August 2023 </p>
+				<h1 style="margin-bottom:0; margin-top:0;">Generating Data</h1>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/Editor.png" alt="The Interface Designers Work With">
+				<h3>Pathfinding Creator Interface</h3>
+				<br>
+				<p style="margin-top:0;">
+					I wanted the editor window to be as simple as possible for people to generate level data.
+					After a fair bit of tweaking and removing exposed variables it felt as simple as it could
+					be with having a texture input, a cost multiplier for the algorithm, and a generate button.
+					All a designer would have to do was bring an image into Unity, allow read/write in the
+					import settings, and drag it into my tool.
+				</p>
+			</div>
+			<div class="Profile" id="WideProfile">
+				<p style="margin-top:0;"> 27th August 2023 </p>
+				<h1 style="margin-bottom:0; margin-top:0;">Optimising The Algorithm</h1>
+				<p style="margin-top:0;">
+					The biggest slowdown times came when figuring out if a tile on the tile grid was pending or
+					not. It was important that the finalised tile grid data was as small as possible to minimise
+					memory requirements as the data filled out. However, that meant I needed a different data
+					structure containing information for a tile that was being processed.
+					The biggest issue with this was the fact that I didn't have an efficient way to find an equivalent
+					tile, which meant I was linearly searching every tile being processed to find one that matched with
+					a tile in the grid based on its coordinates. This got really bad really quickly when using
+					larger textures.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/Optimisation.png" alt="...">
+				<h3>My Optimisation Report to the Team</h3>
+				<br>
+				<p style="margin-top:0;">
+					The first optimisation strategy I employed was using binary searching to find where new tiles should be
+					inserted into the pending list, to keep the list sorted. This reduced holdups by removing the need to
+					linearly search through a potentially very large list.
+					The biggest holdup now was when trying to find if a tile existed in the list based on its coordinates in
+					the tile grid as that cannot be binary searched through. That was solved by using a dictionary where the key
+					was a hash of its coordinates on the tile grid. With both of these solutions the generation of data was far
+					more efficient, as represented in the image above.
+				</p>
+			</div>
+			<div class="Profile" id="WideProfile">
+				<p style="margin-top:0;"> 28th August 2023 </p>
+				<h1 style="margin-bottom:0; margin-top:0;">Outputting Textures For Runtime</h1>
+				<p style="margin-top:0;">
+					The biggest thing that caused issues for me was the large amount of data involved.
+					A lot of optimisations were good but it was clear this could not be ran at runtime.
+					This meant I needed to come up with a way to store the generated data so it could be
+					read at runtime.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/LevelData.png" alt="Level Data Texture">
+				<h3>Level Data as a Texture</h3>
+				<br>
+				<p style="margin-top:0;">
+					Textures and my level data have a few things in common. But the one I care about is
+					that they're both a 2d array of values, and reading textures at runtime is something
+					computers are very good at doing well. I decided to have the red channel determine the
+					tile type (walkable or placeable), the green channel and blue channels determine the x and
+					y components of the flow direction. The flow direction components had to be remapped so
+					that -1 to 1 became 0 to 1. And the walkable vs placeable was just remapped to 0 and 1.
+
+				</p>
+			</div>
+			<div class="Profile" id="WideProfile">
+				<p style="margin-top:0;"> 2nd September 2023 </p>
+				<h1 style="margin-bottom:0; margin-top:0;">Using As a Flocking Influence</h1>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/BoidsConformingToFlowGrid.gif" alt="Gif of Boids on the Flow Grid">
+				<h3>Boids Conforming to the Flow Grid</h3>
+				<br>
+				<p style="margin-top:0;">
+					The enemies in the game project use the boids flocking algorithm to move and swarm
+					together. The enemies get flow information by querying the stored level data for which
+					tile they are on, and then add the returned direction to its flocking influences.
+				</p>
+			</div>
+			<div class="Profile" id="WideProfile">
+				<p style="margin-top:0;"> 24th October 2023 </p>
+				<h1 style="margin-bottom:0; margin-top:0;">Tweaking To Meet New Requirements</h1>
+				<p style="margin-top:0;">
+					Many discussions were had in relation to the state of the game at this point in the
+					project, and artists were having a difficult time fitting art to the restrictive
+					design of binary levels (placeable vs walkable). The idea was proposed that there
+					should be a third option that is both unplacable and unwalkable.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/DrawingToFlowmap.png" alt="A Drawing Turned into a Flowmap Texture">
+				<h3>Support for 3 Values Was Added</h3>
+				<br>
+				<p style="margin-top:0;">
+					The way I solved this was by additionally writing some areas into the input texture as
+					an 'obstacle' value. And artists, who were also designing levels, wanted the order of
+					values switched. So now when the input texture is read it handles 0-1 colour values
+					less than 0.33 as obstacles, values of 0.33-0.67 as placable, and values greater than
+					0.67 as walkable.
+				</p>
+			</div>
+			<div class="Profile" id="WideProfile">
+				<h1 style="margin-bottom:0; margin-top:0;">Post Mortem</h1>
+				<p style="margin-top:0;">
+					I am really proud of the work I did on this tool. It was really fun to work on and it
+					was so satisfying having it all come together and then get to see it working with the
+					basic flocking AI I implemented. And it was so helpful when it came to making level layouts.
+					It allowed for rapid iteration and adjustments without any difficulties. This is a project
+					I would love to expand on at some point as I think it could have been improved further by
+					having the option to randomly distribute environmental assets around the level based on the
+					type of each tile. With that and tweaking from an environment artist I totally see this tool
+					being very useful tool for creating a bunch of different levels and variations!
+				</p>
+				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../images/enemyWaveTool/LateGameWaves.gif" alt="Gif of Hordes of Boids on the Flow Grid">
+				<h3>Hordes of Enemies Flocking on the Flow Grid</h3>
+				<br>
+				<p style="margin-top:0;">
+					This project was a really valuable learning experience for me. It was the biggest delve into
+					one big programming task I've undertaken to this point and it required several optimisation
+					techniques I'd previously only known about in theory. It was very rewarding getting to make
+					something that was used so heavily by the team and I'm really glad I went through with making it.
+				</p>
+			</div>
+		</div>
+		
+		<div class="Footer">
+			<div class="FootNote">
+				<p>Mushroom icon designed by <a href="www.freepik.com" style="margin: 0; float: none;">Freepik</a>.</p>
+				<p>Mail icon designed by <a href="https://www.vecteezy.com/free-png/email-icon" style="margin: 0; float: none;">Vecteezy</a>.</p>
+
+				<br>
+
+				<p>
+					&copy; Laochra 2023
+				</p>
+			</div>
+			
+			<div class="FootNav">
+				<a href="../index.html">Home</a>
+				
+				<br>
+				
+				<a href="../about.html">About</a>
+				
+			</div>
+		</div>
+		
+	</body>
+	
+</html>
