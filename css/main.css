@@ -12,7 +12,7 @@
 @font-face
 {
 	font-family: "bahnschrift";
-	src: url("fonts/bahnschrift/Bahnschrift.eot?iefix") format("embedded-opentype"), url("fonts/bahnschrift/Bahnschrift.woff") format("woff"), url("fonts/bahnschrift/Bahnschrift.ttf") format("truetype"), url("fonts/bahnschrift/Bahnschrift.svg#bahnschrift") format("svg");
+	src: url("../fonts/bahnschrift/Bahnschrift.eot?iefix") format("embedded-opentype"), url("../fonts/bahnschrift/Bahnschrift.woff") format("woff"), url("../fonts/bahnschrift/Bahnschrift.ttf") format("truetype"), url("../fonts/bahnschrift/Bahnschrift.svg#bahnschrift") format("svg");
 }
 
 /* SCROLLBAR */
@@ -205,11 +205,6 @@ body
 	font-style:italic;
 	font-size: 30px;
 	filter:drop-shadow(0 5px 2px black);
-}
-
-.Umbra img
-{
-	filter: drop-shadow(0 5px 3px black);
 }
 
 .Button
@@ -746,20 +741,26 @@ body
 		font-size:3.5vw;
 	}
 	
-	.Umbra
+	.Title
 	{
-		margin-top:40vw;
-		width:80vw;
+		position:relative;
+		display: inline-block;
+		margin:20vh 0 0 0;
+		width:100%;
+		color:#bbbbbb;
+		font-size: 124px;
+		filter:drop-shadow(0 5px 2px black);
 	}
 	
 	.Subtitle
 	{
-		font-size:4.5vw;
+		font-size:3vw;
+		margin-bottom:20vh;
 	}
 	
 	.Button
 	{
-		top:-10vw;
+		top:-20vh;
 		width:30vw;
 		padding: 2.5vh 4vh;
 		font-size:6vw;
@@ -770,28 +771,29 @@ body
 		font-size:12vw;
 	}
 	
-	.Paragraph p
+	.Paragraph
 	{
 		font-size:4vw;
 	}
 	
 	.SocialMediaMenu
 	{
-		top:50vh;
+		top:60vh;
 		left:auto;
 		right:0;
 	}
 	
 	.SocialMediaButton
 	{
-		height:10vw;
-		right:0;
+		height:12vw;
+		left:auto;
+		right:2vw;
 	}
 	
 	.SocialMediaButton:hover
 	{
 		left:auto;
-		right:1vw;
+		right:4vw;
 	}
 	
 	.Video
