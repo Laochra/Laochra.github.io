@@ -86,7 +86,7 @@
 				<h3>Wave Content Fields</h3>
 				<img style="margin-bottom:0; margin-top:0;" src="../images/enemyWaveTool/WaveContentFields.png" alt="Wave Tool Interface">
 				<p style="margin-top:0;">
-					The created data is stored in a custom asset file using Unity's built Scriptable
+					The created data is stored in a custom asset file using Unity's in-built Scriptable
 					Objects. This will allow for the creation of multiple wave collections so multiple
 					designers can iterate on them at once if they wish, or support the need for multiple
 					levels should it arise. Also, the way removing a wave worked was revamped to allow
@@ -106,26 +106,70 @@
 				<p style="margin-top:0;"> 10th August 2023 </p>
 				<h1 style="margin-bottom:0; margin-top:0;">The Requirements</h1>
 				<p style="margin-top:0;">
-					...
+					The project requires defined wave durations, spacing of enemies, multiple defined spawn
+					directions per wave, multiple types of enemies, as well as the ability to be hooked up
+					to indicators that warn the player which direction enemies will come from. All of this
+					is to be achieved in a way that is accessible to designers.
 				</p>
 				<h3>Interface Plan</h3>
 				<img style="margin-bottom:0; margin-top:0;" src="../images/enemyWaveTool/InterfacePlan.png" alt="Wave Tool Interface">
 				<p style="margin-top:0;">
-					...
+					The above plan features dropdowns for selecting enemy types, as well as a selector for timing
+					logic. With Previous will define that a batch of enemies spawns alongside the previous one,
+					while After Previous will define that a batch will wait for the previous to end. Additional
+					delay timers will be added for finer tuning of the waves.
 				</p>
 			</div>
 			<div class="Profile" id="WideProfile">
 				<p style="margin-top:0;"> 19th September 2023 </p>
 				<h1 style="margin-bottom:0; margin-top:0;">Initial Implementation</h1>
 				<p style="margin-top:0;">
-					...
+					Up until this point for our proof of concept I had simply been instantiating enemies at
+					t=0 on a spline and progressing them along it. This was fine for getting the idea across
+					but the enemies were eventually going to use a flocking algorithm so a wave spawner was
+					needed. I was to make a limited version for alpha that was for the most part technically
+					complete, even if it needed to later be improved for use. Due to a lack of designer
+					workpower on the project at the time considerations also needed to be made to ensure not
+					a huge amount of tweaking would be needed.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/enemyWaveTool/InitialImplementation.gif" alt="Alpha Gameplay GIF">
+				<p style="margin-top:0;">
+					The result of this was a system that allowed for the defining of which enemies would
+					appear on a wave, the total amount of enemies the wave contained, and the duration the
+					wave would last. Also a bit later the option was added to choose the direction enemies
+					came from instead of it being random.
 				</p>
 			</div>
 			<div class="Profile" id="WideProfile">
 				<p style="margin-top:0;"> 8th November 2023 </p>
 				<h1 style="margin-bottom:0; margin-top:0;">Aligning With Final Requirements</h1>
 				<p style="margin-top:0;">
-					...
+					Once time between other tasks allowed it I got to work on bringing the wave spawner up to
+					date with the projects needs, and support the fact that there was now a designer wanting
+					to balance the waves and finding the initial implementation too limiting.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/enemyWaveTool/FinalImplementation.gif" alt="Gold Gameplay GIF">
+				<p style="margin-top:0;">
+					This resulted in a system that allowed for almost all of my originally planned features.
+					Batch grouping was one of the most interesting challenges, as the designers wanted to define
+					waves duration in seconds instead of via enemy spacing. The way of solving this was by
+					calculating an "effective" enemy count by grouping together batches that played in sync
+					and adding the duration of each groups longest batch.
+				</p>
+			</div>
+			<div class="Profile" id="WideProfile">
+				<h1 style="margin-bottom:0; margin-top:0;">Post Mortem</h1>
+				<p style="margin-top:0;">
+					Overall this tool is something I am happy with and I was really glad to be able to provide it
+					to the team. If I had more time I would have loved to implement timed delays between batches,
+					as well as the planned cleaner interface.
+				</p>
+				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../images/enemyWaveTool/LateGameWaves.gif" alt="Late Game Waves GIF">
+				<p style="margin-top:0;">
+					I learned a lot from this experience, including the challenges of fitting a tool to designer
+					requirements, needing to make creative decisions and problem solve new requirements as they
+					cropped up, as well as how fitting such an integral tool's development into a project timeline
+					looks.
 				</p>
 			</div>
 		</div>
