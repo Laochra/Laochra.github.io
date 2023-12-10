@@ -77,7 +77,12 @@
 				<br>
 				<h1>The Requirements</h1>
 				<p style="margin-top:0;">
-					---
+					The project needs something to direct enemies along paths and towards the centre
+					of the level. Enemies should be able to move fluidly and not in purely straight lines.
+					Enemies wandering off the path briefly is okay, and expected when they swarm, but they
+					should attempt to get back onto the path quickly. The project also requires a way of
+					determining where towers (shrooms) can be placed, which should be opposite to the
+					areas enemies can traverse.
 				</p>
 			</div>
 
@@ -85,13 +90,18 @@
 				<p style="margin-top:0;"> 23rd August 2023 </p>
 				<h1 style="margin-bottom:0; margin-top:0;">Levels As 2D Arrays</h1>
 				<p style="margin-top:0;">
-					WIP Explain needs for storing flow data, mud, etc. WIP
+					The solution to the requirements I came up with was to have a grid of values that
+					represents the level. This will store whether a tile is Path or Placable so the
+					interaction manager can check where it can and can't place towers. This will also be
+					vital later when storing the direction enemies should be instructed to go.
 				</p>
 				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/LevelGrid.png" alt="Debug Lines Showing the Level Grid">
 				<h3>Debug Display of Level Grids</h3>
 				<br>
 				<p style="margin-top:0;">
-					WIP Explain how the grid works and how it can be referenced. WIP
+					A very helpful thing I got working early on was a visualisation of the levels flow lines.
+					This allowed me to quickly check that values were being set correctly. Currently they all
+					just tend to the centre so thats where the next step comes in.
 				</p>
 			</div>
 			<div class="Profile" id="WideProfile">
@@ -110,7 +120,7 @@
 			<div class="Profile" id="WideProfile">
 				<p style="margin-top:0;"> 26th August 2023 </p>
 				<h1 style="margin-bottom:0; margin-top:0;">Generating Data</h1>
-				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/" alt="The Interface Designers Work With">
+				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/Editor.png" alt="The Interface Designers Work With">
 				<h3>Pathfinding Creator Interface</h3>
 				<br>
 				<p style="margin-top:0;">
@@ -120,8 +130,8 @@
 			<div class="Profile" id="WideProfile">
 				<p style="margin-top:0;"> 27th August 2023 </p>
 				<h1 style="margin-bottom:0; margin-top:0;">Optimising The Algorithm</h1>
-				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/" alt="...">
-				<h3>...</h3>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/Optimisation.png" alt="...">
+				<h3>My Optimisation Report to the Team</h3>
 				<br>
 				<p style="margin-top:0;">
 					WIP Explain the ways in which the algorithm was optimised and how impactful that was. WIP
@@ -131,13 +141,22 @@
 				<p style="margin-top:0;"> 28th August 2023 </p>
 				<h1 style="margin-bottom:0; margin-top:0;">Outputting Textures For Runtime</h1>
 				<p style="margin-top:0;">
-					WIP Explain the need for outputting data as a texture (unwieldy amount of data). WIP
+					The biggest thing that caused issues for me was the large amount of data involved.
+					A lot of optimisations were good but it was clear this could not be ran at runtime.
+					This meant I needed to come up with a way to store the generated data so it could be
+					read at runtime.
 				</p>
 				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/LevelData.png" alt="Level Data Texture">
 				<h3>Level Data as a Texture</h3>
 				<br>
 				<p style="margin-top:0;">
-					...
+					Textures and my level data have a few things in common. But the one I care about is
+					that they're both a 2d array of values, and reading textures at runtime is something
+					computers are very good at doing well. I decided to have the red channel determine the
+					tile type (path or placeable), the green channel and blue channels determine the x and
+					y components of the flow direction. The flow direction components had to be remapped so
+					that -1 to 1 became 0 to 1. And the path vs placeable was just remapped to 0 and 1.
+
 				</p>
 			</div>
 			<div class="Profile" id="WideProfile">
@@ -147,20 +166,29 @@
 				<h3>Boids Conforming to the Flow Grid</h3>
 				<br>
 				<p style="margin-top:0;">
-					...
+					The enemies in the game project using the boids flocking algorithm to move and swarm
+					together. The enemies get flow information by querying the stored level data for which
+					tile they are on, and then add the returned direction to its flocking influences.
 				</p>
 			</div>
 			<div class="Profile" id="WideProfile">
 				<p style="margin-top:0;"> 24th October 2023 </p>
 				<h1 style="margin-bottom:0; margin-top:0;">Tweaking To Meet New Requirements</h1>
 				<p style="margin-top:0;">
-					WIP Explain the new project requirements. WIP
+					Many discussions were had in relation to the state of the game at this point in the
+					project, and artists were having a difficult time fitting art to the restrictive
+					design of binary levels (placeable vs walkable). The idea was proposed that there
+					should be a third option that is both unplacable and unwalkable.
 				</p>
 				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/DrawingToFlowmap.png" alt="A Drawing Turned into a Flowmap Texture">
 				<h3>Support for 3 Values Was Added</h3>
 				<br>
 				<p style="margin-top:0;">
-					WIP Explain the integration of the 3rd value.
+					The way I solved this was by additionally writing some areas into the input texture as
+					an 'obstacle' value. And artists, who were also designing levels, wanted the order of
+					values switched. So now when the input texture is read it handles 0-1 colour values
+					less than 0.33 as obstacles, values of 0.33-0.67 as placable, and values greater than
+					0.67 as walkable.
 				</p>
 			</div>
 			<div class="Profile" id="WideProfile">
