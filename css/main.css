@@ -231,7 +231,7 @@ body
 {
 	position:relative;
 	float:left;
-	top:10vw;
+	top:37.5vw;
 }
 
 .SocialMediaMenu
@@ -699,7 +699,7 @@ body
 	
 	.ScrollTarget
 	{
-		top:-5vh;
+		top:10vh;
 	}
 
 	.Paragraph h1
