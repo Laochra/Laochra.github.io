@@ -91,7 +91,7 @@
 				<h1 style="margin-bottom:0; margin-top:0;">Levels As 2D Arrays</h1>
 				<p style="margin-top:0;">
 					The solution to the requirements I came up with was to have a grid of values that
-					represents the level. This will store whether a tile is Path or Placable so the
+					represents the level. This will store whether a tile is Walkable or Placable so the
 					interaction manager can check where it can and can't place towers. This will also be
 					vital later when storing the direction enemies should be instructed to go.
 				</p>
@@ -108,13 +108,19 @@
 				<p style="margin-top:0;"> 24th August 2023 </p>
 				<h1 style="margin-bottom:0; margin-top:0;">Implementing Dijkstra's Algorithm</h1>
 				<p style="margin-top:0;">
-					WIP Explain why this was the chosen method and what project needs it solves. WIP
+					Due to the need to have all the tiles filter into the centre of the map it seemed like
+					a natural fit to use a flood fill to populate the flow data. To achieve this I used
+					dijkstra's algorithm with the only end condition being when all tiles are filled.
+					This also allows for pathfinding calculations to be front loaded and not become more
+					expensive the more enemies we have.
 				</p>
 				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/DijkstrasDebug.png" alt="Debug Lines Showing Results">
 				<h3>Debug Display of Algorithm Results</h3>
 				<br>
 				<p style="margin-top:0;">
-					WIP Explain the processes the chosen method uses. WIP
+					After first using a given input texture to store in each tile whether it is placeable
+					or walkable, the flood fill commences. Placeable tiles have a higher cost to enter
+					than walkable tiles, causing them to quickly flow back out.
 				</p>
 			</div>
 			<div class="Profile" id="WideProfile">
@@ -124,17 +130,37 @@
 				<h3>Pathfinding Creator Interface</h3>
 				<br>
 				<p style="margin-top:0;">
-					WIP Explain the editor and the choices made for it based on designer needs. WIP
+					I wanted the editor window to be as simple as possible for people to generate level data.
+					After a fair bit of tweaking and removing exposed variables it felt as simple as it could
+					be with having a texture input, a cost multiplier for the algorithm, and a generate button.
+					All a designer would have to do was bring an image into Unity, allow read/write in the
+					import settings, and drag it into my tool.
 				</p>
 			</div>
 			<div class="Profile" id="WideProfile">
 				<p style="margin-top:0;"> 27th August 2023 </p>
 				<h1 style="margin-bottom:0; margin-top:0;">Optimising The Algorithm</h1>
+				<p style="margin-top:0;">
+					The biggest slowdown times came when figuring out if a tile on the tile grid was pending or
+					not. It was important that the finalised tile grid data was as small as possible to minimise
+					memory requirements as the data filled out. However, that meant I needed a different data
+					structure containing information for a tile that was being processed.
+					The biggest issue with this was the fact that I didn't have an efficient way to find an equivalent
+					tile, which meant I was linearly searching every tile being processed to find one that matched with
+					a tile in the grid based on its coordinates. This got really bad really quickly when using
+					larger textures.
+				</p>
 				<img style="margin-bottom:0; margin-top:0;" src="../images/pathfindingCreationTool/Optimisation.png" alt="...">
 				<h3>My Optimisation Report to the Team</h3>
 				<br>
 				<p style="margin-top:0;">
-					WIP Explain the ways in which the algorithm was optimised and how impactful that was. WIP
+					The first optimisation strategy I employed was using binary searching to find where new tiles should be
+					inserted into the pending list, to keep the list sorted. This reduced holdups by removing the need to
+					linearly search through a potentially very large list.
+					The biggest holdup now was when trying to find if a tile existed in the list based on its coordinates in
+					the tile grid as that cannot be binary searched through. That was solved by using a dictionary where the key
+					was a hash of its coordinates on the tile grid. With both of these solutions the generation of data was far
+					more efficient, as represented in the image above.
 				</p>
 			</div>
 			<div class="Profile" id="WideProfile">
@@ -153,9 +179,9 @@
 					Textures and my level data have a few things in common. But the one I care about is
 					that they're both a 2d array of values, and reading textures at runtime is something
 					computers are very good at doing well. I decided to have the red channel determine the
-					tile type (path or placeable), the green channel and blue channels determine the x and
+					tile type (walkable or placeable), the green channel and blue channels determine the x and
 					y components of the flow direction. The flow direction components had to be remapped so
-					that -1 to 1 became 0 to 1. And the path vs placeable was just remapped to 0 and 1.
+					that -1 to 1 became 0 to 1. And the walkable vs placeable was just remapped to 0 and 1.
 
 				</p>
 			</div>
@@ -166,7 +192,7 @@
 				<h3>Boids Conforming to the Flow Grid</h3>
 				<br>
 				<p style="margin-top:0;">
-					The enemies in the game project using the boids flocking algorithm to move and swarm
+					The enemies in the game project use the boids flocking algorithm to move and swarm
 					together. The enemies get flow information by querying the stored level data for which
 					tile they are on, and then add the returned direction to its flocking influences.
 				</p>
@@ -194,13 +220,23 @@
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">Post Mortem</h1>
 				<p style="margin-top:0;">
-					WIP HOW I FEEL AND HOW I'D EXPAND ON IT. WIP
+					I am really proud of the work I did on this tool. It was really fun to work on and it
+					was so satisfying having it all come together and then get to see it working with the
+					basic flocking AI I implemented. And it was so helpful when it came to making level layouts.
+					It allowed for rapid iteration and adjustments without any difficulties. This is a project
+					I would love to expand on at some point as I think it could have been improved further by
+					having the option to randomly distribute environmental assets around the level based on the
+					type of each tile. With that and tweaking from an environment artist I totally see this tool
+					being very useful tool for creating a bunch of different levels and variations!
 				</p>
 				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../images/enemyWaveTool/LateGameWaves.gif" alt="Gif of Hordes of Boids on the Flow Grid">
 				<h3>Hordes of Enemies Flocking on the Flow Grid</h3>
 				<br>
 				<p style="margin-top:0;">
-					WIP WHAT I LEARNED. WIP
+					This project was a really valuable learning experience for me. It was the biggest delve into
+					one big programming task I've undertaken to this point and it required several optimisation
+					techniques I'd previously only known about in theory. It was very rewarding getting to make
+					something that was used so heavily by the team and I'm really glad I went through with making it.
 				</p>
 			</div>
 		</div>
