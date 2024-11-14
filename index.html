@@ -35,21 +35,8 @@
 			
 			<div class="HeaderNav">
 				
-				<a href="about.html">About</a>
-				
-				<div class="DropButton">
-					
-					<div class="DropButtonText" style="margin: 0 2vw">Projects</div>
-					
-					<div class="DropMenu">
-						<br>
-						<a href="projects/pathfinding-creation-tool.html">Pathing Tool</a>
-						<br><br>
-						<a href="projects/enemy-wave-tool.html">Wave Tool</a>
-						<br><br>
-					</div>
-					
-				</div>
+				<a href="about.html">About Me</a>
+				<a href="#Projects">My Projects</a>
 				
 			</div>
 			
@@ -62,17 +49,17 @@
 		
 		<div class="LandingContainer">
 			
-			<div class="Title">
+			<div class="Title" style="cursor: default;">
 				<h1 style="margin-bottom:0;">Laochra Murray</h1>
 			</div>
 			
-			<div class="Subtitle">
+			<div class="Subtitle" style="cursor: default;">
 				Game and Tools Programmer
 			</div>
 			
-			<a href="#Work">
+			<a href="#Projects">
 				<div class="Button">
-				My Work
+				My Projects
 				</div>
 			</a>
 			
@@ -106,86 +93,99 @@
 
 		<div class="Divider" style="margin:30vw 0 5vw 0"></div>
 		
-		<div class="ScrollTarget"><a id="Work"></a></div>
+		<div class="ScrollTarget"><a id="Projects"></a></div>
 
-		<div class="ArticlesContainer">
+		<div class="ArticlesContainer" style="cursor: default;">
 		
 			<div class="Subheading">
-				Recent Projects
+				Project Writeups
 			</div>
 			
-			<div class="Article">
+			<a href="projects/" class="Article" style="cursor: pointer; text-decoration: none;">
+				<img src="images/hexFog/UnderlyingTexture.png" alt="The underlying procedural texture used by the technique">
+				<h1 style="width:100%; margin-top:0; margin-bottom:0; text-align: center;">A New Technique: Hexagonal Fog Maps</h1>
 				
-				Completed November 2023
-				
-				<h1 style="width:100%; margin-bottom:0; text-align: center;">Enemy Waves System and Interface</h1>
+				<div class="TagContainer">						
+					<div class="Tag">Graphics</div>
+					<div class="Tag">Research</div>
+					<div class="Tag">Custom Tech</div>
+				</div>
+			</a>
 
-				<a href="projects/enemy-wave-tool.html">
-					<img src="images/enemyWaveTool/WaveContentFields.png" alt="Image of the Wave Tool">
-				</a>
+			<a href="projects/" class="Article" style="cursor: pointer; text-decoration: none;">
+				<img src="images/---" alt="IMG">
+				<h1 style="width:100%; margin-top:0; margin-bottom:0; text-align: center;">Making a 'Game Engine' Without a Game</h1>
 				
-				<br><br>
+				<div class="TagContainer">						
+					<div class="Tag">Engine Dev</div>
+					<div class="Tag">Tool Dev</div>
+					<div class="Tag">Custom Tech</div>
+				</div>
+			</a>
 
-				I designed and programmed this tool for a Tower Defence project as part of AIE's Professional
-				Game Development course. The goal was to successfully make a tool that makes creating enemy
-				waves as seemless as possible.
-				<br>
-				The project required defined wave durations, spacing of enemies,
-				multiple defined spawn directions per wave, multiple types of enemies, as well as the ability
-				to be hooked up to indicators that warn the player which direction enemies will come from. All
-				of this was to be achieved in a way that was accessible to designers.
+			<a href="projects/" class="Article" style="cursor: pointer; text-decoration: none;">
+				<img src="images/---" alt="IMG">
+				<h1 style="width:100%; margin-top:0; margin-bottom:0; text-align: center;">Making a Game in Custom Tech</h1>
 				
-				<br>
+				<div class="TagContainer">						
+					<div class="Tag">Gameplay</div>
+					<div class="Tag">Tool Dev</div>
+					<div class="Tag">Custom Tech</div>
+				</div>
+			</a>
+
+			<a href="projects/" class="Article" style="cursor: pointer; text-decoration: none;">
+				<img src="images/---" alt="IMG">
+				<h1 style="width:100%; margin-top:0; margin-bottom:0; text-align: center;">Compute Particle System</h1>
 				
-				<a href="projects/enemy-wave-tool.html" style="width:100%; text-align:center;">See My Creation Process!</a>
+				<div class="TagContainer">						
+					<div class="Tag">Graphics</div>
+					<div class="Tag">Research</div>
+					<div class="Tag">Custom Tech</div>
+				</div>
+			</a>
+
+			<a href="projects/" class="Article" style="cursor: pointer; text-decoration: none;">
+				<img src="images/---" alt="IMG">
+				<h1 style="width:100%; margin-top:0; margin-bottom:0; text-align: center;">Handling Undefined Behaviour</h1>
 				
 				<div class="TagContainer">
-					Tags
-					
-					<br>
-					
-					<div class="Tag">Tool Development</div>
-					<div class="Tag">Programming</div>
+					<div class="Tag">Debugging</div>
+					<div class="Tag">Custom Tech</div>
+				</div>
+			</a>
+
+			<a href="projects/" class="Article" style="cursor: pointer; text-decoration: none;">
+				<img src="images/---" alt="IMG">
+				<h1 style="width:100%; margin-top:0; margin-bottom:0; text-align: center;">Optimisation and Speed / Unit Tests</h1>
+				
+				<div class="TagContainer">						
+					<div class="Tag">Library Dev</div>
+					<div class="Tag">Tests</div>
+				</div>
+			</a>
+			
+			<a href="projects/pathfinding-creation-tool.html" class="Article" style="cursor: pointer; text-decoration: none;">
+				<img src="images/pathfindingCreationTool/DrawingToFlowmap.png" alt="Image Representing a Drawing Turned into a Flowmap">
+				<h1 style="width:100%; margin-top:0; margin-bottom:0; text-align: center;">Precomputed Pathfinding Generation</h1>
+				
+				<div class="TagContainer">						
+					<div class="Tag">Tool Dev</div>
+					<div class="Tag">AI Pathfinding</div>
+					<div class="Tag">Unity</div>
+				</div>
+			</a>
+
+			<a href="projects/enemy-wave-tool.html" class="Article" style="cursor: pointer; text-decoration: none;">
+				<img src="images/enemyWaveTool/WaveContentFields.png" alt="Image of the Wave Tool">
+				<h1 style="width:100%; margin-top:0; margin-bottom:0; text-align: center;">Enemy Waves System and Interface</h1>
+				
+				<div class="TagContainer">						
+					<div class="Tag">Tool Dev</div>
 					<div class="Tag">UI Design</div>
 					<div class="Tag">Unity</div>
 				</div>
-				
-			</div>
-			
-			<div class="Article">
-				
-				Completed September 2023
-				
-				<h1 style="width:100%; margin-bottom:0; text-align:center;">Precomputed Pathfinding Generation</h1>
-
-				<a href="projects/pathfinding-creation-tool.html">
-					<img src="images/pathfindingCreationTool/DrawingToFlowmap.png" alt="Image Representing a Drawing Turned into a Flowmap">
-				</a>
-
-				<br><br>
-
-				I designed and programmed this tool for a Tower Defence project as part of AIE's
-				Professional Game Development course. The goal was to streamline the process of creating
-				levels so that the art and pathfinding generation could line up as smoothly as possible.
-				<br>
-				This was achieved using Dijkstra's algorithm to generate a flow map using an input texture with
-				3 shades defining the difficulty of traversal. The output texture could then be read at runtime
-				and stored in memory to be queried by the game's flocking algorithm as enemies traversed the map.				
-				<br>
-				
-				<a href="projects/pathfinding-creation-tool.html" style="width:100%; text-align: center;">See My Creation Process!</a>
-				
-				<div class="TagContainer">
-					Tags
-					
-					<br>
-					
-					<div class="Tag">Tool Development</div>
-					<div class="Tag">Programming</div>
-					<div class="Tag">Systems Design</div>
-				</div>
-				
-			</div>
+			</a>
 			
 		</div>
 		
