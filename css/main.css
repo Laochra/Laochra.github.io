@@ -79,13 +79,18 @@ body
 	margin-left:2vh;
 	height:80%;
 	filter:drop-shadow(0 6px 2px black) brightness(80%);
-	transition-duration: 0.2s;
+	transition-duration: 0.1s;
 }
 
 .HeaderLogo:hover
 {
-	filter:drop-shadow(0 6px 2px black) brightness(90%);
 	margin-left: 2.75vh;
+	filter:
+		drop-shadow(0px 2px 0px rgb(171, 148, 225))
+		drop-shadow(0px -2px 0px rgb(171, 148, 225))
+		drop-shadow(-2px 0px 0px rgb(171, 148, 225))
+		drop-shadow(2px 0px 0px rgb(171, 148, 225))
+		brightness(90%);
 }
 
 .HeaderNav
@@ -118,59 +123,8 @@ body
 
 .HeaderNav a:hover
 {
-	color:#eeeeee;
+	color: rgb(171, 148, 225);
 	transform:scale(1.1);
-}
-
-.DropButton
-{
-	position:relative;
-	float:left;
-	padding-top: 0.5vw;
-	margin-top:1vw;
-	margin-left:2vw;
-	margin-right:2vw;
-	margin-bottom: 0.5vw;
-	
-	border-radius:6px;
-}
-
-.DropButton:hover
-{
-	cursor:default;
-	
-	color:#eeeeee;
-	background-color:rgb(30,30,30);
-	box-shadow: 0 2px 5px black;
-}
-
-.DropButton:hover .DropMenu
-{
-	display:block;
-}
-
-.DropMenu
-{
-	cursor:default;
-	display:none;
-	
-	font-size: 16px;
-	text-align: center;
-}
-
-.DropMenu a
-{
-	float:none;
-	margin:0;
-
-	color:#cccccc;
-	transition-duration: 0.15s;
-}
-
-.DropMenu a:hover
-{
-	color:#eeeeee;
-	font-size: 17px;
 }
 
 .LandingContainer
@@ -184,7 +138,7 @@ body
 	display: inline-block;
 	margin:25vh 0 0 0;
 	width:100%;
-	color:#dddddd;
+	color: #dddddd;
 	font-size: 48px;
 	filter:drop-shadow(0 5px 2px black);
 }
@@ -194,7 +148,7 @@ body
 	text-align: center;
 	margin-top:0;
 
-	color:#bbbbbb;
+	color:rgb(171, 148, 225);
 	font-style:italic;
 	font-size: 30px;
 	filter:drop-shadow(0 5px 2px black);
@@ -211,19 +165,25 @@ body
 	text-align:center;
 	
 	border-radius:6px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: rgb(30,30,30);
+
 	color:#cccccc;
 	background-color:rgb(30,30,30);
 	box-shadow: 0 2px 5px black;
 	
-	transition-duration: 0.3s;
+	transition-duration: 0.1s;
 }
 
 .Button:hover
 {
 	cursor:pointer;
-	transform:scaleX(1.1);
-	
-	color:#dddddd;
+	transform:scale(1.05);
+
+	border-color: rgb(128, 128, 171);
+
+	color: rgb(171, 148, 225);
 	background-color:rgb(32,32,32);
 }
 
@@ -253,13 +213,18 @@ body
 	height:5vw;
 	filter: drop-shadow(0 4px 2px black) brightness(80%);
 	margin-bottom: 2vh;
-	transition-duration: 0.3s;
+	transition-duration: 0.1s;
 }
 
 .SocialMediaButton:hover
 {
 	left: 1vw;
-	filter:drop-shadow(0 4px 2px black) brightness(90%);
+	filter:
+		drop-shadow(0px 2px 0px rgb(171, 148, 225))
+		drop-shadow(0px -2px 0px rgb(171, 148, 225))
+		drop-shadow(-2px 0px 0px rgb(171, 148, 225))
+		drop-shadow(2px 0px 0px rgb(171, 148, 225))
+		brightness(90%);
 }
 
 .Divider
@@ -327,6 +292,10 @@ body
 	width:20vw;
 	
 	border-radius:10px;
+	border-width:5px;
+	border-style:solid;
+	border-color: rgb(30,30,30);
+
 	text-align: left;
 	color:#bbbbbb;
 	background-color:rgb(30,30,30);
@@ -334,36 +303,36 @@ body
 	transition-duration: 0.1s;
 }
 
-.Article:hover
+.Article h1
 {
-	transform: scale(1.05);
-	cursor: default;
-}
+	width:100%;
+	margin-top:0;
+	margin-bottom:0;
+	text-align: center;
 
+	color: #dddddd;
+	transition-duration: 0.1s;
+}
 .Article img
 {
 	width:20vw;
 	filter:drop-shadow(0 4px 2px black)brightness(80%);
 }
 
-.Article a
+.Article:hover
 {
-	position:relative;
-	float: left;
-	margin-top:1vw;
+	cursor: default;
+	transform: scale(1.05);
 	
-	color:#cccccc;
-	font-size: 18px;
-	text-decoration:none;
-	transition-duration: 0.1s;
+	border-color: rgb(128, 128, 171);
+	background-color:rgb(32,32,32);
 }
 
-.Article a:hover
+.Article:hover h1
 {
-	margin-left:0.3vw;
-	
-	color:#eeeeee;
+	color: rgb(171, 148, 225);
 }
+
 
 .TagContainer
 {
@@ -383,7 +352,7 @@ body
 	color:rgb(30,30,30);
 	font-weight:1000;
 	border-radius:25px;
-	background-color:#bbbbbb;
+	background-color:rgb(128, 128, 171);
 	filter:drop-shadow(0 4px 2px black);
 }
 
@@ -434,17 +403,28 @@ body
 	width:20vw;
 	
 	border-radius:10px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: rgb(128, 128, 171);
 	filter:brightness(80%) drop-shadow(0 3px 5px black);
 }
 
-.Profile h1, h3
+.Profile h1
 {
 	margin:0;
+	font-size: 40px;
+	color: rgb(171, 148, 225);
 }
-
+.Profile h3
+{
+	margin:0;
+	font-size: 24px;
+	color: rgb(128, 128, 171);
+}
 .Profile p
 {
 	text-align: center;
+	font-size: 18px;
 }
 
 .Profile:hover p
@@ -541,7 +521,7 @@ body
 .Footer a:hover
 {
 	margin-right:0.5vw;
-	color:#eeeeee;
+	color:rgb(171, 148, 225);
 }
 
 /* SMALL SCREEN ADJUSTMENTS */
