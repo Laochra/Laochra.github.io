@@ -436,13 +436,15 @@ body
 {
 	color:#bbbbbb;
 	text-decoration: none;
-	font-size: 1.7vw;
+	font-weight: 900;
+	color: rgb(128, 128, 171);
 	transition-duration: 0.1s;
 }
 
 .Profile a:hover
 {
-	color:#dddddd;
+	color:rgb(171, 148, 225);
+	cursor: pointer;
 }
 
 .ProfileButtonsContainer
@@ -586,11 +588,6 @@ body
 	.Profile img
 	{
 		width:40vw;
-	}
-	
-	.Profile a
-	{
-		font-size:3vw;
 	}
 	
 	.ProfileButton
@@ -769,11 +766,6 @@ body
 	.Profile img
 	{
 		width:75vw;
-	}
-	
-	.Profile a
-	{
-		font-size:6vw;
 	}
 	
 	.Profile h1
