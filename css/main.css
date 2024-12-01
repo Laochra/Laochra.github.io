@@ -313,6 +313,14 @@ body
 	color: #dddddd;
 	transition-duration: 0.1s;
 }
+.Article h3
+{
+	width:100%;
+	margin-bottom:0;
+	text-align: center;
+
+	color: rgb(128, 128, 171);
+}
 .Article img
 {
 	width:20vw;
