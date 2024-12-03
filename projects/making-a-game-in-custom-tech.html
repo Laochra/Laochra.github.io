@@ -55,12 +55,12 @@
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">The Goal</h1>
 				<br>
-				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../---" alt="GIF of Gameplay">
-				<h3>Busharium</h3>
+				<iframe width="394vw" height="222vh" src="https://www.youtube.com/embed/TMWfi_Vwkrk?si=YuANTGKLrDWv8NFx" title="Busharium Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+				<h3>Busharium Trailer</h3>
 				<p style="margin-top:0;">
 					Busharium is a cosy environment builder game that utilises a hex grid. It has a stylised art direction,
 					invoking Australian watercolour and Ken Sugimori's original Pokemon concepts. It also heavily draws
-					inspiration from Australian flora and flora.
+					inspiration from Australian flora and fauna.
 					<br><br>
 					This project was worked on by a team over 5 months, and I was the sole programmer. My responsibilities
 					involved all of the gameplay code, engine code, and all of the tooling that the team would need to make this game.
@@ -74,11 +74,11 @@
 				<br><br>
 				<h1>The Requirements</h1>
 				<p style="margin-top:0;">
-					As the only programmer on this project a lot of my own choices would have implicit effects on others in the project.
-					I ended up taking on a backend role in a big way, spending a good 60-70% of my time working on tooling to support
-					the other team members. This would involve a comprehensive art importer for debugging and setting up assets, data oriented
-					systems allowing designers to set up as much as possible without me needing to alter code, and a way to interface with
-					everything that wouldn't become a burden for those using the tooling.
+					As the only programmer on this project (and the one writing the engine) a lot of my own choices would have implicit effects
+					on others in the project, and that was not a responsibility I took lightly. I ended up taking on a backend role in a big way,
+					spending a good 60-70% of my time working on tooling to support the other team members. This would involve a comprehensive
+					art importer for debugging and setting up assets, data oriented systems allowing designers to set up as much as possible
+					without me needing to alter code, and a way to interface with everything that wouldn't become a burden for those using the tooling.
 				</p>
 			</div>
 
@@ -103,67 +103,165 @@
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">Game-Specific Tooling</h1>
 				<br>
-				<img style="margin-bottom:0; margin-top:0;"  src="../---" alt="Img">
-				<h3>---</h3>
+				<img style="margin-bottom:0; margin-top:0;"  src="../images/gameInCustomTech/GameTooling.png" alt="Hex Editor">
+				<h3>"Hex Editor"</h3>
 				<br>
 				<p style="margin-top:0;">
-					---
+					So much of the game's logic revolved around the connectivity of different assets. What tiles are used
+					for which habitat, which sprites represent which collected habitat (objective), and which audio file
+					plays when. The code at no point has any knowledge of any of these assets, and so it has a json file that
+					points it to the assets, but also defines many of the game's important variables. Designers were able to
+					completely modify milestone thresholds, how many habitats existed, where UI elements would be placed on the
+					screen and more. Many of the selections within this editor window are aware of data from other sections,
+					for example: the dropdowns for which tiles make up a habitat reflect which tiles have been defined by the designer.
 				</p>
 				<br>
-				<img style="margin-bottom:0; margin-top:0;" src="../---" alt="Img">
-				<h3>---</h3>
+				<img style="margin-bottom:0; margin-top:0; width:100%" src="../images/gameInCustomTech/ArtImporter.gif" alt="GIF of Using Art Importer">
+				<h3>Art Importer</h3>
 				<br>
 				<p style="margin-top:0;">
-					---
+					The engine's art importer was revamped for this game, to support the needs of the artists. The goal of
+					the art importer is to preview how an asset looks before commiting to it. Artists could see the assets in
+					the lighting of the game, manipulate the camera settings, and apply materials, all before importing it. Then
+					once the artist was ready they could click the 'cook' button, and all the mesh files would be converted to
+					an internal format and connected via a prefab, with the applied materials saved. The revamping of the art
+					importer was guided by the needs of the artists on this project.
+				</p>
+				<br>
+				<img style="margin-bottom:0; margin-top:0; width:100%" src="../images/gameInCustomTech/UITooling.gif" alt="GIF of Moving UI Around">
+				<h3>UI System & Tooling</h3>
+				<br>
+				<p style="margin-top:0;">
+					...
 				</p>
 			</div>
 
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">The Rendering</h1>
 				<br>
-				<img style="margin-bottom:0; margin-top:0;"  src="../---" alt="Img">
-				<h3>---</h3>
+				<img style="margin-bottom:0; margin-top:0;"  src="../images/gameInCustomTech/ArtStyle.png" alt="Reference Images">
+				<h3>Art Style References</h3>
 				<br>
 				<p style="margin-top:0;">
-					---
+					The goal the artists had was for any frame of the game to look like a watercolour painting,
+					drawing inspiration from Australian watercolour, and Ken Sugimori's original Pokemon concepts.
+					So, with this in mind, I worked with them to ensure the rendering in the engine would support that.
+					I tore out the PBR lighting equations and gave our tech artist, Phoenix Marsh, free reign (with support)
+					to set up the lighting as they liked. They previously had experience setting up a 'toon shader' and
+					so we collaborated to translate it into something that would look right for our game.
 				</p>
 				<br>
-				<img style="margin-bottom:0; margin-top:0;" src="../---" alt="Img">
-				<h3>---</h3>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/gameInCustomTech/ShadowNoise.png" alt="Image of Shadows Offset by Noise">
+				<h3>Shadow Noise</h3>
 				<br>
 				<p style="margin-top:0;">
-					---
+					Things didn't look quite right when having harsh cutoffs between highlights and shadows. This is
+					a result of using a toon shader as the idea is to eliminate gradients. However, we wanted to emulate
+					the less uniform, more expressive nature of paintings, where no brushstroke is exact, and drops of paint
+					and texture result in uneven or splotchy lines. To do this I used a noise map seeded with the XZ position of
+					each fragment in world space to offset the highlight values, and offset the shadowmaps. A side benefit of doing
+					this is that it was able to mask the resolution of the shadowmap, making it look higher detail than we otherwise could.
+				</p>
+				<br>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/hexFog/FogPreview.gif" alt="Preview of Hexagonal Fog">
+				<h3>Hexagonal Fog</h3>
+				<br>
+				<p style="margin-top:0;">
+					We needed a way to present the boundary of play to the player, and we wanted it to be something dynamic and in-world
+					as it would expand as the player progressed. For this I developed what I believe to be a new technique for generating
+					a fog map that aligns to a hex grid.
+					<br>
+					<a href="making-a-game-in-custom-tech.html">Click here for my writeup on developing this technique</a>.
 				</p>
 			</div>
 
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">CI/CD</h1>
 				<br>
-				<img style="margin-bottom:0; margin-top:0;"  src="../---" alt="Img">
-				<h3>---</h3>
-				<br>
+				<h3>Continuous Integration</h3>
 				<p style="margin-top:0;">
-					---
+					Over the project I frequently set up different feature branches that would be commited to regularly.
+					As I was the only programmer I didn't have as much time to set up tests for everything, but I did have a
+					designer on the team, Alicia Hayashi, who was able to run daily smoke tests for me before integrating to main.
+					Due to the short playtime of our game (3-5mins), we decided it was reasonable to set it up that way.
 				</p>
 				<br>
-				<img style="margin-bottom:0; margin-top:0;" src="../---" alt="Img">
-				<h3>---</h3>
-				<br>
+				<h3>Continuous Delivery</h3>
 				<p style="margin-top:0;">
-					---
+					I had a build script set up that built out both the editor version and standalone version of the game.
+					And on top of this, assets would be cooked down on import so we didn't need to include it in the build pipeline.
+					This resulted in always having a working version of the game to play, and very quick turn around for making
+					changes and seeing them reflected in game.
+					<br><br>
+					For deployments I had Butler set up, which is a command line tool for itch.io that allows you to easily upload
+					new versions while only modifying changed files to reduce upload time.
 				</p>
 			</div>
 
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">Post Mortem</h1>
 				<p style="margin-top:0;">
-					How I feel.
+					I was the sole programmer on this project, and I also programmed the engine used for
+					it. I spent my time balancing working on tooling for the other team members and
+					working on gameplay code. I feel I was able to be a useful member of the team by
+					communicating thoroughly, holding myself to a high standard, and dedicating myself to
+					the project. I feel really happy with how the project turned out and I'm so proud of
+					the amazing work each of the members of my team put in.
 				</p>
-				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../---" alt="Img">
-				<h3>---</h3>
+				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../images/gameInCustomTech/BushariumThumbnail.png" alt="Screenshot of the game">
+				<h3>The Gold Version of Busharium</h3>
 				<br>
+				<h1 style="margin-bottom:0; margin-top:0;">Others on the Team</h1>
+				<h3><a href="https://aliciahayashi.com/"  target="_blank" rel="noopener noreferrer">Alicia Hayashi</a></h3>
 				<p style="margin-top:0;">
-					What I learned.
+					<i>Design Lead & QA</i>
+					<br>
+					Alicia worked tirelessly on the project. It was easy to see how dedicated she was to
+					what she was doing, and she proved time and again how she could soar when the
+					opportunity presented. She handled the challenges of being Design Lead in stride and
+					was a big force in the game being as polished as it ended up. She was never afraid to
+					get her hands dirty in engine and set things up, smash out a bunch of UI, or prototype
+					with pen and paper.
+				</p>
+				<h3><a href="https://sites.google.com/view/blakeandrewsportfolio/"  target="_blank" rel="noopener noreferrer">Blake Andrews</a></h3>
+				<p style="margin-top:0;">
+					<i>Producer, Designer, & Sound Support</i>
+					<br>
+					Blake was a fantastic producer. His management of the project and us as a time, while
+					fairly loose, was very appreciated. He always made sure everyone’s voices were being
+					heard, and took everyone’s needs seriously. On top of that he showed off a range of
+					design skills and worked really well with Alicia to ensure that the game was being
+					received the way we intended and wasn’t bogged down by hitches.
+				</p>
+				<h3><a href="https://au.linkedin.com/in/isabella-verduci-372a89182"  target="_blank" rel="noopener noreferrer">Isabella Verduci</a></h3>
+				<p style="margin-top:0;">
+					<i>Sound & Composition</i>
+					<br>
+					I didn't get to work as closely with Isabella since she worked remotely, but she put
+					a ton of effort into the work she made. She came to us and worked with us through
+					multiple revisions of sounds and the music, always looking to improve and share
+					her talent. The final result of her assets came out really well and fit the game
+					wonderfully, which was especially impressive given she joined the project halfway.
+				</p>
+				<h3><a href="https://phoenix_marsh.artstation.com/"  target="_blank" rel="noopener noreferrer">Phoenix Marsh</a></h3>
+				<p style="margin-top:0;">
+					<i>Environment & Tech Artist</i>
+					<br>
+					Phoenix killed it on pushing the game’s art style. Between their hard work on pre-
+					visualisation, fine tuning shaders, and attention to detail with the tile assets, they really
+					brought a sense of life to the game. They worked really well with Pierce to create a
+					cohesive style, and assets to suit. Phoenix was prepared to learn new tools, request
+					things they needed, and collaborate with any of the rest of us to improve the game.
+				</p>
+				<h3><a href="https://siddanspj.artstation.com/"  target="_blank" rel="noopener noreferrer">Pierce Siddans</a></h3>
+				<p style="margin-top:0;">
+					<i>Environment & Character Artist</i>
+					<br>
+					Pierce did such an amazing job adding wonder to the game’s art. His habitat assets,
+					and spirit assets are such a nice reward for the player to discover, and really evoke the
+					sense of accomplishment and joy we’d hoped to encourage in players. He was
+					incredibly communicative and was never afraid to speak up if he didn’t understand
+					something. Pierce was an incredibly dedicated member of the team and project.
 				</p>
 			</div>
 		</div>
