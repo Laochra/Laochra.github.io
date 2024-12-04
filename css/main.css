@@ -518,8 +518,12 @@ body
 
 .Footer a:hover
 {
-	margin-right:0.5vw;
 	color:rgb(171, 148, 225);
+}
+
+.Footer .SocialMediaButton:hover
+{
+	transform:scale(1.0);
 }
 
 /* SMALL SCREEN ADJUSTMENTS */
@@ -594,7 +598,7 @@ body
 	
 	.FootNote
 	{
-		width:60vw;
+		width:40vw;
 	}
 }
 
