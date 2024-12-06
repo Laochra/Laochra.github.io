@@ -84,28 +84,78 @@
 
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">Hex Grid and Hex Coordinates</h1>
-				<br>
-				<img style="margin-bottom:0; margin-top:0;"  src="../---" alt="Img">
-				<h3>---</h3>
-				<br>
 				<p style="margin-top:0;">
-					---
+					Busharium took place on a hexagonal grid. Tiles in a hexagonal grid line up quite differently to square grids,
+					which means different considerations need to be made for both how they are stored in memory and how they are
+					navigated. This game needed a way to query adjacent tiles whenever a new tile was placed, and unlike a square
+					grid where there are 4 adjacencies, for hex grid's there are 6 adjacencies, which can't line up with how it's
+					stored in memory as cleanly.
 				</p>
 				<br>
-				<img style="margin-bottom:0; margin-top:0;" src="../---" alt="Img">
-				<h3>---</h3>
-				<br>
+				<h3>Prototype: Linked Graph Structure</h3>
 				<p style="margin-top:0;">
-					---
+					Given the highest priority was on having easy to perform adjacency checks, and we hadn't worked out how big we wanted
+					the grid to max out at, I used a doubly-linked graph structure for our prototype. Each tile would have a pointer
+					to it's neighbours, and they in turn would have a pointer back to it. Then I had a lookup table with each tile, where the 
+					key was a hash of the tile coordinates.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/gameInCustomTech/HexDoubled.png" alt="Img">
+				<p>
+					This setup was a little unwieldy but it was something I was able to throw together
+					pretty quickly with my understanding of other graph structures like linked lists and heirarchy's. The positions that would
+					be used for their hash was something called "Doubled Coordinates". Since the hexes were flat topped, the way this works is
+					by treating a distance of 0.5 on the Y as 1, and 1 as 2. This would mean that a tile down and to the right of 0,0 would be
+					1,1 and a tile directly down would be 0,2. This allowed storing the coordinates as a pair of shorts, and the ability to
+					hash them by simply bitshifting them into an integer.
+				</p>
+				<br>
+				<h3>Optimising with an Offset Grid</h3>
+				<p style="margin-top:0;">
+					There were a few problems with the dynamic graph structure that I hoped to solve with a static grid and offset coordinates.
+					The first of these issues was that every time a tile was placed it required adding an element to a dynamic structure,
+					which meant potential for hitches whenever that structure needed to be resized. It also meant bad cache performance when
+					comparing tiles near each other, as they could be stored in wildly different places in memory. And the final issue that
+					had been causing some bugs in conversion operations, is that in doubled coordinates not every set of coordinates is valid,
+					and with floating point innacuracy at further sections of the grid we occasionally would try to lookup an invalid coordinate
+					and have to handle that edge case somehow.
+
+					TODO: discuss prototype problems with invalid coordinates, dynamic sizing, bad cache optimisation with linked structure.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/gameInCustomTech/HexOffset.png" alt="Img">
+				<p>
+					So to fix the performance issues, I decided to store the entire grid at its largest possible size in a static array of arrays
+					in memory. I also made it so each tile in this grid was as small as possible, and not a pointer to some heap object, to improve
+					cache performance. The most relevent tile data, and a pointer to the render objects would be what was contained in the grid.
+					<br><br>
+					The way I layed this out in memory, was using something called "Offset Coordinates", where it would be just like a square grid,
+					except each even column was offset. This had the benefit of working with a static structure, as well as not having any invalid
+					coordinates to deal with. The only flaw with storing the tiles this way is that its hard to navigate a structure like this and
+					determing adjacent tiles.
+				</p>
+				<br>
+				<h3>Navigating with a Cube/Axial Grid</h3>
+				<p style="margin-top:0;">
+					In order to navigate the structure I set up some conversion functions to something called "Axial Coordinates", which is
+					identical to the useful "Cube Coordinates" except without the need to store the third component. In this coordinate space,
+					q + r + s = 0, so with only two coordinates stored you can always find the third. Each adjacent tile in this system is
+					accessed by adding 1 to a component, and subtracting 1 from another. The rules for this are a little complex to explain,
+					so I've provided this image to show the pattern.
+				</p>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/gameInCustomTech/HexCube.png" alt="Img">
+				<p>
+					Credit for these diagrams goes to Red Blob Games.
+					<br>
+					<a href="https://www.redblobgames.com/grids/hexagons/" target="_blank" rel="noopener noreferrer">
+						Click here for more information on hexagonal coordinate systems,<br>
+						as well as interactive versions of the diagrams.
+					</a>
 				</p>
 			</div>
 
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">Game-Specific Tooling</h1>
 				<br>
-				<img style="margin-bottom:0; margin-top:0;"  src="../images/gameInCustomTech/GameTooling.png" alt="Hex Editor">
 				<h3>"Hex Editor"</h3>
-				<br>
 				<p style="margin-top:0;">
 					So much of the game's logic revolved around the connectivity of different assets. What tiles are used
 					for which habitat, which sprites represent which collected habitat (objective), and which audio file
@@ -115,10 +165,9 @@
 					screen and more. Many of the selections within this editor window are aware of data from other sections,
 					for example: the dropdowns for which tiles make up a habitat reflect which tiles have been defined by the designer.
 				</p>
+				<img style="margin-top:0;" src="../images/gameInCustomTech/GameTooling.png" alt="Hex Editor">
 				<br>
-				<img style="margin-bottom:0; margin-top:0; width:100%" src="../images/gameInCustomTech/ArtImporter.gif" alt="GIF of Using Art Importer">
 				<h3>Art Importer</h3>
-				<br>
 				<p style="margin-top:0;">
 					The engine's art importer was revamped for this game, to support the needs of the artists. The goal of
 					the art importer is to preview how an asset looks before commiting to it. Artists could see the assets in
@@ -127,12 +176,35 @@
 					an internal format and connected via a prefab, with the applied materials saved. The revamping of the art
 					importer was guided by the needs of the artists on this project.
 				</p>
+				<img style="margin-top:0; width:100%" src="../images/gameInCustomTech/ArtImporter.gif" alt="GIF of Using Art Importer">
 				<br>
-				<img style="margin-bottom:0; margin-top:0; width:100%" src="../images/gameInCustomTech/UITooling.gif" alt="GIF of Moving UI Around">
 				<h3>UI System & Tooling</h3>
-				<br>
 				<p style="margin-top:0;">
-					...
+					The game's need for UI was simple for the most part, just requiring elements in the corner to allow the player
+					to see controls, see which tile they have selected, and see a notification when they've unlocked new variants.
+					There were two more complex parts though, being the radial menus for selecting a tile, and the stickersheet
+					which would be animated at certain gameplay milestones.
+				</p>
+				<img style="margin-bottom:0; margin-top:0; width:100%" src="../images/gameInCustomTech/UITooling.gif" alt="GIF of Moving UI Around">
+				<p style="margin-top:0;">
+					The other consideration we had was accounting for different resolutions. Accounting for different sizes but same
+					aspect ratio was achieved by rendering the UI Sprites in Clip Space as opposed to Screen Space. I ended up having
+					2 values to dictate the position of the sprites, an anchor and an offset. The offset, unlike the anchor, would have
+					its X component be multiplied by the aspect of the screen. This way designers could set up sprites to be positioned
+					exactly how they'd like them when it came to different aspect ratios.
+				</p>
+				<img style="margin-bottom:0; margin-top:0" src="../images/gameInCustomTech/RadialMenu.gif" alt="GIF of Radial Menu">
+				<p style="margin-top:0;">
+					The interactivity of the radial menus was super simple, basically just doing dot product comparisons to see which
+					slice was being hovered. In terms of rendering it though, basically we just had 3 images for each radial menu, one
+					showing each tile as locked, one showing each as unlocked, and one showing each as hovered. Then in a shader I just
+					display each pixel as one of the three images based on whether its slice is locked/unlocked/hovered.
+				</p>
+				<img style="margin-bottom:0; margin-top:0" src="../images/gameInCustomTech/Stickersheet.gif" alt="GIF of Stickersheet Animation">
+				<p style="margin-top:0;">
+					I was able to use the basic coroutine functionality I had made for my engine to get this event to play out over time,
+					and apart from that its really simple. All I had to do was modify the anchor over time with an easing function.
+					I set up values the designers could tweak like delays, durations, and the amount the sticker would move to be placed.
 				</p>
 			</div>
 
