@@ -51,135 +51,205 @@
 			
 			<div class="Title" style="margin:0;">Making a Custom C++ 'Game Engine'</div>
 			<div class="Subtitle">2024</div>
+			<br>
+			<div class="Subtitle">This page is currently a work in progress</div>
+			<br>
 
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">The Goal</h1>
 				<br>
-				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../---" alt="Img">
-				<h3>---</h3>
+				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../images/customEngine/TheGoal.gif" alt="GIF of Modifying Game Objects">
+				<h3>Mycelia Game Engine</h3>
+				<br>
 				<p style="margin-top:0;">
-					---
+					Given the length of time I spent working on this project (around a year as of December 2024),
+					its goal has shifted a bit. The first and foremost goal though was to have an opportunity to
+					progress my skills in tools programming, learn and get experience with graphics, and to discover
+					how different aspects of a game engine come together. As the project progressed though I hoped for
+					an opportunity to use it to make a game with a team, and worked on making the experience as good
+					as possible for that goal.
+					<br><br>
+					<a href="https://github.com/nlohmann/json" target="_blank" rel="noopener noreferrer">
+						Click here to view the engine's source code.
+					</a>
 				</p>
 				<br>
 				<br>
 				<h1>The Requirements</h1>
 				<p style="margin-top:0;">
-					---
-				</p>
-				<img style="margin-bottom:0; margin-top:0;" src="../---" alt="Img">
-				<h3>---</h3>
-				<br>
-				<p style="margin-top:0;">
-					---
-				</p>
-			</div>
-
-			
-
-			<div class="Profile" id="WideProfile">
-				<h1 style="margin-bottom:0; margin-top:0;">Feedback on Using My Engine</h1>
-				<br>
-				<h3>The Good</h3>
-				<br>
-				<p style="margin-top:0;">
-					---
-					<br><br>
-					---
-				</p>
-				<br>
-				<h3>The Bad</h3>
-				<br>
-				<p style="margin-top:0;">
-					---
-					<br><br>
-					---
-				</p>
-				<br>
-				<h3>The Takeaways</h3>
-				<br>
-				<p style="margin-top:0;">
-					---
-					<br><br>
-					---
+					I had no idea what type of game this engine would be used for. I was hoping for it to be used
+					for a 5 month group student capstone project, but I wouldn't know what type of game would be made
+					in it until that project started, if I was even able to get things to a state where people would
+					be comfortable using the engine for that. So the things I prioritised were core features that would
+					be useful for most if not all games.
+					
 				</p>
 			</div>
 
 			<div class="Profile" id="WideProfile">
-				<h1 style="margin-bottom:0; margin-top:0;">Editor vs Standalone</h1>
-				<br>
-				<img style="margin-bottom:0; margin-top:0;"  src="../---" alt="Img">
-				<h3>---</h3>
-				<br>
+				<h1 style="margin-bottom:0; margin-top:0;">The Features</h1>
+				<h3>Engine</h3>
 				<p style="margin-top:0;">
-					---
-					<br><br>
-					---
+					3D Object Heirarchy
+					<br>
+					Dynamic UI System
+					<br>
+					Compute Particle System
+					<br>
+					Event Parellisation
+					<br>
+					Gamepad Support
+					<br>
+					Audio Support
+				</p>
+				<h3>Rendering</h3>
+				<p style="margin-top:0;">
+					Forward Rendered PBR
+					<br>
+					Post-processing Stack
+					<br>
+					Shadowmapping
+					<br>
+					Bloom
+					<br>
+					FXAA
+				</p>
+				<h3>Tooling</h3>
+				<p style="margin-top:0;">
+					Material Editor
+					<br>
+					Art Preview & Importer
+					<br>
+					Transform Gizmos
+					<br>
+					Object Picking
+					<br>
+					Clean & Dockable UI					
 				</p>
 			</div>
 
 			<div class="Profile" id="WideProfile">
-				<h1 style="margin-bottom:0; margin-top:0;">Basic Tooling & Interface</h1>
-				<br>
-				<img style="margin-bottom:0; margin-top:0;"  src="../---" alt="Img">
-				<h3>---</h3>
+				<h1 style="margin-bottom:0; margin-top:0;">Utilised Libraries</h1>
+				<p style="margin-top:0;">
+					<a href="https://www.opengl.org/" target="_blank" rel="noopener noreferrer">
+						OpenGL
+					</a>
+					<br>
+					<a href="https://glad.dav1d.de/" target="_blank" rel="noopener noreferrer">
+						Glad
+					</a>
+					<br>
+					<a href="https://www.glfw.org/" target="_blank" rel="noopener noreferrer">
+						GLFW
+					</a>
+					<br>
+					<a href="https://github.com/g-truc/glm" target="_blank" rel="noopener noreferrer">
+						GLM
+					</a>
+					<br>
+					<a href="https://github.com/nothings/stb" target="_blank" rel="noopener noreferrer">
+						STB Image
+					</a>
+					<br>
+					<a href="https://solhsa.com/soloud/" target="_blank" rel="noopener noreferrer">
+						Soloud
+					</a>
+					<br>
+					<a href="https://github.com/nlohmann/json" target="_blank" rel="noopener noreferrer">
+						NLohmann's JSON
+					</a>
+				</p>
 				<br>
 				<p style="margin-top:0;">
-					---
-					<br><br>
-					---
+					<i>Editor Only</i>
+					<br>
+					<a href="https://github.com/ocornut/imgui" target="_blank" rel="noopener noreferrer">
+						ImGui
+					</a>
+					<br>
+					<a href="https://github.com/assimp/assimp" target="_blank" rel="noopener noreferrer">
+						Assimp
+					</a>
+					<br>
+					<a href="https://sourceforge.net/projects/tinyfiledialogs/" target="_blank" rel="noopener noreferrer">
+						Tiny File Dialogues
+					</a>
 				</p>
 			</div>
 
 			<div class="Profile" id="WideProfile">
-				<h1 style="margin-bottom:0; margin-top:0;">PBR Rendering</h1>
-				<br>
-				<img style="margin-bottom:0; margin-top:0;"  src="../---" alt="Img">
-				<h3>---</h3>
-				<br>
-				<p style="margin-top:0;">
-					---
-					<br><br>
-					---
-				</p>
+				<h1 style="margin-bottom:0; margin-top:0;">Rendering</h1>
+				<h3>Coming Soon</h3>
 			</div>
 
 			<div class="Profile" id="WideProfile">
-				<h1 style="margin-bottom:0; margin-top:0;">Transform Gizmos</h1>
-				<br>
-				<img style="margin-bottom:0; margin-top:0;"  src="../---" alt="Img">
-				<h3>---</h3>
-				<br>
-				<p style="margin-top:0;">
-					---
-					<br><br>
-					---
-				</p>
+				<h1 style="margin-bottom:0; margin-top:0;">Tooling</h1>
+				<h3>Coming Soon</h3>
 			</div>
 
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">Actually Making a Game</h1>
 				<br>
-				<img style="margin-bottom:0; margin-top:0;"  src="../---" alt="Img">
-				<h3>---</h3>
+				<img style="margin-bottom:0; margin-top:0;" src="../images/gameInCustomTech/BushariumThumbnail.png" alt="Busharium Thumbnail">
+				<h3>Busharium</h3>
 				<br>
 				<p style="margin-top:0;">
-					---
+					This game was made by a team of 6, with me as the sole programmer. We also had Alicia Hayashi and Blake Andrews as
+					designers, Phoenix Marsh and Pierce Siddans as artists, and Isabella Verduci as composer. The game was developed over
+					the course of 5 months and made within my engine.
 					<br><br>
-					---
+					<a href="making-a-game-in-custom-tech.html">Click here to read about making Busharium, to play it, or to view source code.</a>
 				</p>
+
 			</div>
 
 			<div class="Profile" id="WideProfile">
-				<h1 style="margin-bottom:0; margin-top:0;">Post Mortem</h1>
+				<h1 style="margin-bottom:0; margin-top:0;">Feedback on Using My Engine</h1>
 				<p style="margin-top:0;">
-					How I feel.
+					After the conclusion of the Busharium game project, I asked my team members if they'd be willing to
+					be interviewed on their thoughts, feelings, and takeaways from working in my engine.
 				</p>
-				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../---" alt="Img">
-				<h3>---</h3>
 				<br>
+				<h3>The Positives</h3>
 				<p style="margin-top:0;">
-					What I learned.
+					A common theme in the feedback was that the engine was easy to use, simple to navigate, and wasn't bogged down in bloat.
+					This can be attributed to the tooling really all being built for purpose, and the team was really positive about that.
+					I recieved a lot of positive feedback on how well I communicated, and how easy it was to talk through how possible it would
+					be for me to implement certain things. A funny point mentioned was how quick the load times are compared to Unity, since here
+					they're relatively instant compared to about 6 minutes for Unity. It was also appreciated how quickly I was able to tend to bugs,
+					including the occassional crashes early in the project, and how helpful it was that I was there to ask questions at any time.
 				</p>
+				<br>
+				<h3>The Things to Improve</h3>
+				<p style="margin-top:0;">
+					The biggest sore point was the lack of ability for designers to rapidly prototype ideas in engine. They managed to make
+					do with paper prototypes and the game we were making lended itself well to that, but it was noticed that without scripting support
+					for the designers, there was a limited amount of prototyping that could occur, since I'd be the one doing it all. It was mentioned
+					that it would be good to have an in-engine filesystem to use instead of always opening up the built-in windows one, as well as having
+					engine-specific filetype icons, and thats something I can certainly look into. Another key point was the fact there wasn't a lot of
+					documentation. Since a lot of things the team were using was specific to the game, and it was a small team I figured I could get away
+					with not much written documentation. I think that was a bit of a mistake, and although it didn't hurt this project, its certainly
+					something I will improve on for the future.
+				</p>
+				<br>
+				<h3>The Takeaways</h3>
+				<p style="margin-top:0;">
+					The team was generally really happy to have had the opportunity to work within a custom engine. Even with some of the drawbacks,
+					they mention being glad to have had the experience. The team kept coming back to how simple and nice it was to work in something
+					where all of the tools have a purpose that they can utilise, and not need to worry about things that aren't there for them.
+					Alicia in particular mentioned how interesting it was for her being able to ask and discuss how I implemented different things,
+					and getting to see things built up for the team. The team definitely realised and felt how much effort I put into communicating with
+					them on their needs, and working together to see what I could do to support them.
+					<br><br>
+					<a href="engine-feedback.html">Click here for the full transcriptions of the audio interviews I did with my team.</a>
+				</p>
+				
+			</div>
+
+
+			<div class="Profile" id="WideProfile">
+				<h1 style="margin-bottom:0; margin-top:0;">Post Mortem</h1>
+				<h3>Coming Soon</h3>
 			</div>
 		</div>
 		
