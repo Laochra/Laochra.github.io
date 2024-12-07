@@ -51,9 +51,6 @@
 			
 			<div class="Title" style="margin:0;">Making a Custom C++ 'Game Engine'</div>
 			<div class="Subtitle">2024</div>
-			<br>
-			<div class="Subtitle">This page is currently a work in progress</div>
-			<br>
 
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">The Goal</h1>
@@ -178,7 +175,7 @@
 			</div>
 
 			<div class="Profile" id="WideProfile">
-				<h1 style="margin-bottom:0; margin-top:0;">PBR Rendering</h1>
+				<h1 style="margin-bottom:0; margin-top:0;">Physically Based Rendering (PBR)</h1>
 				<p style="margin-top:0;">
 					<a href="https://learnopengl.com/" target="_blank" rel="noopener noreferrer">
 						LearnOpenGL
@@ -204,11 +201,101 @@
 
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">Tooling</h1>
-				<h3>Coming Soon</h3>
+				<h3>Art Importer</h3>
+				<p style="margin-top:0;">
+					The engine's art importer was revamped for the game Busharium, to support the needs of the artists.
+					The goal of the art importer is to preview how an asset looks before commiting to it.
+					Artists could see the assets in the lighting of the game, manipulate the camera settings,
+					and apply materials, all before importing it. Then once the artist was ready they could click
+					the 'cook' button, and all the mesh files would be converted to an internal format and connected
+					via a prefab, with the applied materials saved. The revamping of the art importer was guided by
+					the needs of the artists on the project. Before the revamp, it was capable of some of these things,
+					but it didn't have a preview window or of course ways to set up and control that window.
+				</p>
+				<img style="margin-top:0; width:100%" src="../images/gameInCustomTech/ArtImporter.gif" alt="GIF of Art Importer">
+				<br>
+				<h3>UI System & Tooling</h3>
+				<p style="margin-top:0;">
+					The UI System was developed for the game Busharium, and so was made to fit the needs of that project.
+					The game's need for UI was simple for the most part, just requiring elements in the corner to allow the
+					player to see controls, see which tile they have selected, and see a notification when they've unlocked
+					new variants. There were two more complex parts though, being the radial menus for selecting a tile, and
+					the stickersheet which would be animated at certain gameplay milestones. 
+				</p>
+				<img style="margin-top:0; width:100%" src="../images/gameInCustomTech/UITooling.gif" alt="GIF of UI Tooling">
+				<p style="margin-top:0;">
+					The other consideration we had was accounting for different resolutions. Accounting for different sizes
+					but same aspect ratio was achieved by rendering the UI Sprites in Clip Space as opposed to Screen Space.
+					I ended up having 2 values to dictate the position of the sprites, an anchor and an offset. The offset,
+					unlike the anchor, would have its X component be multiplied by the aspect of the screen. This way
+					designers could set up sprites to be positioned exactly how they'd like them when it came to different
+					aspect ratios.
+				</p>
+				<br>
+				<h3>Object Picking</h3>
+				<p style="margin-top:0;">
+					The way I implemented object picking was fairly simple. I didn't have any kind of physics set up,
+					but I did have render targets set up. So what I did was render the scene, and each pixel would render
+					the guid of the object its a part of to the screen. Then when clicking on the scene view in the editor,
+					I get what the guid is of the pixel being hovered, then select the matching game object. This method
+					means that object picking lines up 1 to 1 with how objects are rendered, which is exactly what I wanted.
+				</p>
+				<br>
+				<h3>Transform Gizmos</h3>
+				<p style="margin-top:0;">
+					Setting up transform gizmos was a big quality of life feature. By far the easier of the two to get working
+					translation. I simply rendered 3 cones along each axis, and when the user would click and hold on them I'd
+					translate the object along that axis by an amount relative to the mouse's displacement to the start position
+					and the distance of the camera. There were a few transformation matrices involved to get between the different
+					view spaces, but nothing I hadn't handled before when rendering objects. I managed to get this working for axes in
+					world-space, and axes relative to the object's rotation.
+				</p>
+				<img style="margin-top:0;" src="../images/customEngine/RotationGizmoNotes.png" alt="Notes on Rotation Gizmos">
+				<p style="margin-top:0;">
+					The much harder process was getting rotation gizmos going. You can see my scribbled notes above from when I was trying
+					to wrap my head around how I was going to do it. As shown in the notes I simplify the problem by using transformation
+					matrices to handle the problem relative to the selected axis of rotation. Once I have that I treat the axis as the normal
+					of a plane of rotation, where I project the cursor position and rotate the object based on the difference in angle from
+					the start position. This took a lot of debugging to get right, but really expanded my confidence with this type of maths.
+					<br><br>
+					Another thing I learned as part of this was more abstract. Upon sharing it with some people I knew I found out there is
+					an easy to implement library (ImGuizmo) that does a lot of this for you. From then I have made sure to search out for open-source
+					libraries for common problems. Despite the fact I could have saved a lot of time with an already made solution, I do
+					feel this experience was very beneficial for my maths skills and confidence.
+				</p>
 			</div>
 
 			<div class="Profile" id="WideProfile">
-				<h1 style="margin-bottom:0; margin-top:0;">Actually Making a Game</h1>
+				<h1 style="margin-bottom:0; margin-top:0;">Compute Particle System</h1>
+				<p style="margin-top:0;">
+					Something I found very early on was how little good resources there are online for compute shaders.
+					And even once getting a basic compute shader working it was challenging researching how to get shader buffer objects
+					working so I could send arbitrary data to the gpu, rather than relying on samplers. Eventually through reading many
+					different papers and discussing how compute shaders worked with someone more experienced with them I was able to get it
+					all working. This was definitely good practice researching something with little to no documentation, and using resources
+					only tangentially related to my use case to learn how to do what I needed.
+				</p>
+				<img style="margin-top:0;" src="../images/customEngine/ParticlesWithSprites.gif" alt="GIF of Billboarding Particles">
+				<h3>Performance</h3>
+				<p style="margin-top:0;">
+					When implementing billboarding I decided to use geometry shaders, even though I knew they are renowned for not being
+					very performant. I did this as it would be a simpler starting point since geometry shaders were essentially made with
+					this in mind (generating new vertices on the fly). However, as expected, this heavily reduced performance. In the future
+					I would like to update the systems to calculate the billboard point positions in the compute shader.
+				</p>
+				<img style="margin-top:0;" src="../images/customEngine/ParticlesReel.gif" alt="GIF of Particles">
+				<p style="margin-top:0;">
+					I came to notice that uploading all of the initial data to the gpu takes a lot of time. In fact it is the most
+					noticeable performance issue the particle systems have. With large amounts of particles it leads to noticeable hitches,
+					from tiny stutters on low end machines at 100,000+ particles, to freezes of almost a second on most devices with
+					1,000,000+ particles. I’m going to look into preloading the particle systems’ initial data and playing them with a t
+					value rather than incrementing the initial data, so that the data doesn’t need to be re-initialised and re-sent to the
+					gpu each time the system is restarted.
+				</p>
+			</div>
+
+			<div class="Profile" id="WideProfile">
+				<h1 style="margin-bottom:0; margin-top:0;">Making a Game in It</h1>
 				<br>
 				<img style="margin-bottom:0; margin-top:0;" src="../images/gameInCustomTech/BushariumThumbnail.png" alt="Busharium Thumbnail">
 				<h3>Busharium</h3>
@@ -269,7 +356,29 @@
 
 			<div class="Profile" id="WideProfile">
 				<h1 style="margin-bottom:0; margin-top:0;">Post Mortem</h1>
-				<h3>Coming Soon</h3>
+				<p style="margin-top:0;">
+					It feels a bit weird doing a post mortem on the engine since I plan to continue working on it,
+					but given I managed to make a game in it with a team, this feels like a pretty good milestone to touch on.
+					Overall I'm really happy with how the engine has come out so far. I really enjoyed architecting and making
+					the engine's systems, and developing the tools to accompany them. It was an especially great opportunity
+					getting to work with a team to make a game in it. Not only was it fulfilling getting to see my engine used by
+					the team to make a fun game, but it also fueled so many new features and updates to the engine. Something I'll
+					be working on soon is integrating some of the systems I made for the game into the core engine, such as the UI
+					system. Going forward into the future I'd really like to continue working on this engine and make more games in
+					it.
+				</p>
+				<img style="margin-bottom:0; margin-top:0; width:100%;" src="../images/customEngine/CustomEngineFinal.png" alt="Image of the Engine">
+				<h3>Screenshot of the Engine</h3>
+				<br>
+				<p style="margin-top:0;">
+					Working on my own engine project has been a great opportunity to expand on my tooling skills as I'd hoped,
+					and I've learned so much about graphics, and the internals of making an engine tick. I was able to learn how to
+					debug graphics with render doc, and tackle undefined behaviour. I learned some of the flaws with using an
+					inheritance-based system for game objects, and will be moving to an entity component system going forward. I
+					learned how to use compute shaders and set up shader buffer objects for my particle system. And I gained so
+					much practice with my maths skills. I'm so glad I decided to work on this project, I think it really helped me
+					grow as a programmer, and it was really fun.
+				</p>
 			</div>
 		</div>
 		
