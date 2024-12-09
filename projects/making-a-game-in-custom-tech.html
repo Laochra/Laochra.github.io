@@ -58,12 +58,12 @@
 				<iframe width="394vw" height="222vh" src="https://www.youtube.com/embed/TMWfi_Vwkrk?si=YuANTGKLrDWv8NFx" title="Busharium Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 				<h3>Busharium Trailer</h3>
 				<p style="margin-top:0;">
-					Busharium is a cosy environment builder game that utilises a hex grid. It has a stylised art direction,
+					Busharium is a cosy environment builder game that uses a hex grid. It has a stylised art direction,
 					invoking Australian watercolour and Ken Sugimori's original Pokemon concepts. It also heavily draws
 					inspiration from Australian flora and fauna.
 					<br><br>
-					This project was worked on by a team over 5 months, and I was the sole programmer. My responsibilities
-					involved all of the gameplay code, engine code, and all of the tooling that the team would need to make this game.
+					I was the sole programmer on this project, working with a team of 5 others over 5 months. As I was developing the code
+					for both the game and engine, I had a very load-bearing role on this project, with many aspects of it depending on me.
 					<br><br>
 					<a href="https://octostitch.itch.io/cosy-hexes" target="_blank" rel="noopener noreferrer">Click here to download the game</a>.
 					<br>
@@ -87,14 +87,14 @@
 				<p style="margin-top:0;">
 					Busharium took place on a hexagonal grid. Tiles in a hexagonal grid line up quite differently to square grids,
 					which means different considerations need to be made for both how they are stored in memory and how they are
-					navigated. This game needed a way to query adjacent tiles whenever a new tile was placed, and unlike a square
-					grid where there are 4 adjacencies, for hex grid's there are 6 adjacencies, which can't line up with how it's
+					navigated. This game needed a way to query neibouring tiles whenever a new tile was placed, and unlike a square
+					grid where there are 4 neighbours, for hex grid's there are 6 neighbours, which can't line up with how it's
 					stored in memory as cleanly.
 				</p>
 				<br>
 				<h3>Prototype: Linked Graph Structure</h3>
 				<p style="margin-top:0;">
-					Given the highest priority was on having easy to perform adjacency checks, and we hadn't worked out how big we wanted
+					Given the highest priority was on having easy-to-perform adjacency checks, and we hadn't worked out how big we wanted
 					the grid to max out at, I used a doubly-linked graph structure for our prototype. Each tile would have a pointer
 					to it's neighbours, and they in turn would have a pointer back to it. Then I had a lookup table with each tile, where the 
 					key was a hash of the tile coordinates.
@@ -116,26 +116,26 @@
 					which meant potential for hitches whenever that structure needed to be resized. It also meant bad cache performance when
 					comparing tiles near each other, as they could be stored in wildly different places in memory. And the final issue that
 					had been causing some bugs in conversion operations, is that in doubled coordinates not every set of coordinates is valid,
-					and with floating point innacuracy at further sections of the grid we occasionally would try to lookup an invalid coordinate
+					and with floating point inaccuracy at further sections of the grid we occasionally would try to lookup an invalid coordinate
 					and have to handle that edge case somehow.
 				</p>
 				<img style="margin-bottom:0; margin-top:0;" src="../images/gameInCustomTech/HexOffset.png" alt="Img">
 				<p>
-					So to fix the performance issues, I decided to store the entire grid at its largest possible size in a static array of arrays
+					To fix the performance issues, I decided to store the entire grid at its largest possible size in a static array of arrays
 					in memory. I also made it so each tile in this grid was as small as possible, and not a pointer to some heap object, to improve
 					cache performance. The most relevent tile data, and a pointer to the render objects would be what was contained in the grid.
 					<br><br>
 					The way I layed this out in memory, was using something called "Offset Coordinates", where it would be just like a square grid,
 					except each even column was offset. This had the benefit of working with a static structure, as well as not having any invalid
 					coordinates to deal with. The only flaw with storing the tiles this way is that its hard to navigate a structure like this and
-					determing adjacent tiles.
+					determing neibouring tiles.
 				</p>
 				<br>
 				<h3>Navigating with a Cube/Axial Grid</h3>
 				<p style="margin-top:0;">
 					In order to navigate the structure I set up some conversion functions to something called "Axial Coordinates", which is
 					identical to the useful "Cube Coordinates" except without the need to store the third component. In this coordinate space,
-					q + r + s = 0, so with only two coordinates stored you can always find the third. Each adjacent tile in this system is
+					q + r + s = 0, so with only two coordinates stored you can always find the third. Each neibouring tile in this system is
 					accessed by adding 1 to a component, and subtracting 1 from another. The rules for this are a little complex to explain,
 					so I've provided this image to show the pattern.
 				</p>
@@ -155,7 +155,7 @@
 				<br>
 				<h3>"Hex Editor"</h3>
 				<p style="margin-top:0;">
-					So much of the game's logic revolved around the connectivity of different assets. What tiles are used
+					Much of the game's logic revolved around the connectivity of different assets. What tiles are used
 					for which habitat, which sprites represent which collected habitat (objective), and which audio file
 					plays when. The code at no point has any knowledge of any of these assets, and so it has a json file that
 					points it to the assets, but also defines many of the game's important variables. Designers were able to
@@ -178,9 +178,9 @@
 				<br>
 				<h3>UI System & Tooling</h3>
 				<p style="margin-top:0;">
-					The game's need for UI was simple for the most part, just requiring elements in the corner to allow the player
+					The game's UI requirements were fairly standard for the most part, requiring elements in the corner to allow the player
 					to see controls, see which tile they have selected, and see a notification when they've unlocked new variants.
-					There were two more complex parts though, being the radial menus for selecting a tile, and the stickersheet
+					There were two more unique parts though, being the radial menus for selecting a tile, and the stickersheet
 					which would be animated at certain gameplay milestones.
 				</p>
 				<img style="margin-bottom:0; margin-top:0; width:100%" src="../images/gameInCustomTech/UITooling.gif" alt="GIF of Moving UI Around">
@@ -193,16 +193,16 @@
 				</p>
 				<img style="margin-bottom:0; margin-top:0" src="../images/gameInCustomTech/RadialMenu.gif" alt="GIF of Radial Menu">
 				<p style="margin-top:0;">
-					The interactivity of the radial menus was super simple, basically just doing dot product comparisons to see which
-					slice was being hovered. In terms of rendering it though, basically we just had 3 images for each radial menu, one
-					showing each tile as locked, one showing each as unlocked, and one showing each as hovered. Then in a shader I just
-					display each pixel as one of the three images based on whether its slice is locked/unlocked/hovered.
+					For the interactivity of the radial menus I do dot product comparisons to see which slice was being hovered.
+					In terms of rendering it, we had 3 images for each radial menu, one showing each tile as locked,
+					one showing each as unlocked, and one showing each as hovered. Then in a shader I display each pixel
+					as one of the three images based on whether its slice is locked/unlocked/hovered.
 				</p>
 				<img style="margin-bottom:0; margin-top:0" src="../images/gameInCustomTech/Stickersheet.gif" alt="GIF of Stickersheet Animation">
 				<p style="margin-top:0;">
-					I was able to use the basic coroutine functionality I had made for my engine to get this event to play out over time,
-					and apart from that its really simple. All I had to do was modify the anchor over time with an easing function.
-					I set up values the designers could tweak like delays, durations, and the amount the sticker would move to be placed.
+					I was able to use the coroutine functionality I had made for my engine to get this event to play out over time.
+					Using that, I modify the anchor over time with an easing function. I set up values the designers could tweak
+					like delays, durations, and the amount the sticker would move to be placed.
 				</p>
 			</div>
 
@@ -230,7 +230,7 @@
 					the less uniform, more expressive nature of paintings, where no brushstroke is exact, and drops of paint
 					and texture result in uneven or splotchy lines. To do this I used a noise map seeded with the XZ position of
 					each fragment in world space to offset the highlight values, and offset the shadowmaps. A side benefit of doing
-					this is that it was able to mask the resolution of the shadowmap, making it look higher detail than we otherwise could.
+					this is that it was able to conceal the resolution of the shadowmap, making it look higher detail than we otherwise could.
 				</p>
 				<br>
 				<img style="margin-bottom:0; margin-top:0;" src="../images/hexFog/FogPreview.gif" alt="Preview of Hexagonal Fog">
@@ -279,16 +279,16 @@
 				<p style="margin-top:0;">
 					A common theme in the feedback was that the engine was easy to use, simple to navigate, and wasn't bogged down in bloat.
 					This can be attributed to the tooling really all being built for purpose, and the team was really positive about that.
-					I recieved a lot of positive feedback on how well I communicated, and how easy it was to talk through how possible it would
-					be for me to implement certain things. A funny point mentioned was how quick the load times are compared to Unity, since here
-					they're relatively instant compared to about 6 minutes for Unity. It was also appreciated how quickly I was able to tend to bugs,
+					I received a lot of positive feedback on how well I communicated, and how easy it was to talk through how possible it would
+					be for me to implement certain things. The team was very surprised and happy with how quick and snappy the load times were
+					in the engine. It was also appreciated how quickly I was able to tend to bugs,
 					including the occassional crashes early in the project, and how helpful it was that I was there to ask questions at any time.
 				</p>
 				<br>
 				<h3>The Things to Improve</h3>
 				<p style="margin-top:0;">
 					The biggest sore point was the lack of ability for designers to rapidly prototype ideas in engine. They managed to make
-					do with paper prototypes and the game we were making lended itself well to that, but it was noticed that without scripting support
+					do with paper prototypes and the game we were making lent itself well to that, but it was noticed that without scripting support
 					for the designers, there was a limited amount of prototyping that could occur, since I'd be the one doing it all. It was mentioned
 					that it would be good to have an in-engine filesystem to use instead of always opening up the built-in windows one, as well as having
 					engine-specific filetype icons, and thats something I can certainly look into. Another key point was the fact there wasn't a lot of
@@ -301,10 +301,10 @@
 				<p style="margin-top:0;">
 					The team was generally really happy to have had the opportunity to work within a custom engine. Even with some of the drawbacks,
 					they mention being glad to have had the experience. The team kept coming back to how simple and nice it was to work in something
-					where all of the tools have a purpose that they can utilise, and not need to worry about things that aren't there for them.
-					Alicia in particular mentioned how interesting it was for her being able to ask and discuss how I implemented different things,
-					and getting to see things built up for the team. The team definitely realised and felt how much effort I put into communicating with
-					them on their needs, and working together to see what I could do to support them.
+					where all of the tools are relevant to them. Alicia in particular mentioned how interesting it was for her being able to ask and
+					discuss how I implemented different things, and getting to see things built up for the team. The team definitely realised and
+					felt how much effort I put into communicating with them on their needs, and working together to see what I could do to support
+					them.
 					<br><br>
 					<a href="engine-feedback.html">Click here for the full transcriptions of the audio interviews I did with my team.</a>
 				</p>
